@@ -1,4 +1,7 @@
-.navigation-bg li {
+*{
+  padding: 0;
+  margin: 0;
+}.navigation-bg li {
   background-color: #232b48;
   border: rgb(124, 124, 124) solid;
   border-width: 1px 0;
@@ -10,6 +13,7 @@
   background-color: hsl(224, 24%, 15%);
   color: white;
   height: 100%;
+  width: 100%;
 }
 .navigation-menu p {
   background-color: #1e2331;

@@ -14,6 +14,7 @@ async function createEmployee(req, res, next) {
       const AddEmployee = await EmployeeService.createEmployee(req.body);
       if (!AddEmployee) {
         res.status(400).json({
+          success: "false",
           error: "Failed to add employee",
         });
       } else if (AddEmployee) {
@@ -28,6 +29,7 @@ async function createEmployee(req, res, next) {
     } catch (error) {
       console.log(error);
       res.status(400).json({
+        success: "false",
         error: "someting went wrong",
       });
     }
