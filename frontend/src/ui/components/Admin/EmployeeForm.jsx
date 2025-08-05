@@ -14,7 +14,6 @@ function EmployeeForm() {
     active_employee: 1,
   });
   const [errors, setErrors] = useState({});
-  const [SuccessMessage, setSuccessMessage] = useState("");
   const [ServerError, setServerError] = useState("");
   const navigate = useNavigate();
 
@@ -26,6 +25,7 @@ function EmployeeForm() {
       [name]: value,
     }));
   }
+
   // form validation
   const validateForm = () => {
     const newErrors = {};
@@ -35,7 +35,6 @@ function EmployeeForm() {
     } else if (!/^[a-zA-Z\s]+$/.test(formData.employee_first_name)) {
       newErrors.name = "Name must contain only letters";
     }
-
     // email validation
     if (!formData.employee_email.trim()) {
       newErrors.email = "Email is required";
@@ -54,6 +53,7 @@ function EmployeeForm() {
     }
     return newErrors;
   };
+
   // handle submit
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +64,7 @@ function EmployeeForm() {
     }
     try {
       const data = await submitEmployee(formData);
-      if (data.success == false) {
+      if (data.success == "false") {
         setServerError(data.error);
         return;
       }
@@ -73,10 +73,22 @@ function EmployeeForm() {
       setServerError(error.message || "Submission failed");
     }
   };
+
   return (
     <section className="contact-section custom-bg pl-5">
       <div className="auto-container contact-title ml-6 pl-5">
         <h2>Add a new Employee</h2>
+        {ServerError && (
+          <div className="d-flex pl-md-5 ml-md-6 mt-3">
+            <div
+              className="alert alert-danger py-2 px-3 shadow-sm"
+              role="alert"
+            >
+              {ServerError}
+            </div>
+          </div>
+        )}
+
         <div className="row clearfix">
           <div className="form-column col-lg-7">
             <div className="inner-column">

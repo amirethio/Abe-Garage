@@ -7,6 +7,7 @@ async function createEmployee(req, res, next) {
   );
   if (EmployeeExists) {
     res.status(400).json({
+      success: "false",
       error: "This email adress is already associated with other employee",
     });
   } else {
