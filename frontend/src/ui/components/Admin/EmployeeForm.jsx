@@ -88,7 +88,6 @@ function EmployeeForm() {
             </div>
           </div>
         )}
-
         <div className="row clearfix">
           <div className="form-column col-lg-7">
             <div className="inner-column">
