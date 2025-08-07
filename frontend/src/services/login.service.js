@@ -1,4 +1,6 @@
-import axiosInstance from "./../API/axiosInstance";
+import axiosInstance from "../API/axiosInstance";
+
+
 const submitLogin = async (params) => {
   try {
     const response = await axiosInstance.post("/api/employee/login", params);
@@ -8,4 +10,4 @@ const submitLogin = async (params) => {
   }
 };
 
-export default submitLogin;
+export { submitLogin };

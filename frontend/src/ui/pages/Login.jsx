@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import loginservice from "./../../services/login.service";
+import { submitLogin } from "./../../services/login.service";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hook/useAuth";
+
 function Login() {
   const [formData, setFormData] = useState({
     employee_email: "",
@@ -10,6 +12,8 @@ function Login() {
   const [error, setErrors] = useState("");
   const [validationError, setvalidationError] = useState("");
   const navigate = useNavigate();
+  const context = useAuth();
+
   const handleChange = (event) => {
     const { value, name } = event.target;
     setFormData((prev) => ({
@@ -40,20 +44,20 @@ function Login() {
       return;
     }
     try {
-      const submitForm = await loginservice(formData);
+      const submitForm = await submitLogin(formData);
 
       if (submitForm.status == "fail") {
         setErrors(submitForm.message);
         return;
       } else {
-        localStorage.setItem("authToken", submitForm.data.employee_token);
+        localStorage.setItem("authToken", submitForm?.data?.employee_token);
+        context.setuserState(!context.userState);
         navigate("/");
       }
-    } catch (error) {
+    } catch (err) {
       setErrors("something went wrong");
     }
   };
-
   return (
     <section className="contact-section custom-bg pl-5">
       <div className="auto-container contact-title ml-6 pl-5">

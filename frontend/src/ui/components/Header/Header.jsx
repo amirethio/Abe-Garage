@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./../../../assets/images/logo.png";
-
+import useAuth from "../../../hook/useAuth";
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const context = useAuth();
+  console.log(context);
+
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    context.setuserState(!context.userState);
+  };
+  const naviaget = useNavigate();
+
+  const handlelogin = () => {
+    naviaget("/login");
+  };
   return (
     <header className="main-header header-style-one">
       <div className="header-top">
@@ -14,8 +27,10 @@ function Header() {
               </div>
             </div>
             <div className="right-column">
-              <div className="phone-number">
-                Schedule Your Appontment Today : <strong>1800 456 7890</strong>
+              <div className="phone-number mr-5">
+                {context?.userData
+                  ? `Hello 👋 ${context?.userData?.employee_first_name}`
+                  : "Make Appointment"}
               </div>
             </div>
           </div>
@@ -62,9 +77,15 @@ function Header() {
               </div>
               <div className="search-btn"></div>
               <div className="link-btn">
-                <a href="/login" className="theme-btn btn-style-one">
-                  Login
-                </a>
+                {context?.userData ? (
+                  <a className="theme-btn btn-style-one" onClick={logout}>
+                    Logout
+                  </a>
+                ) : (
+                  <a className="theme-btn btn-style-one" onClick={handlelogin}>
+                    Login
+                  </a>
+                )}
               </div>
             </div>
           </div>
