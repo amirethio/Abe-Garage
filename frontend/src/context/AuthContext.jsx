@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [userData, setUserData] = useState(null);
-  const [userState, setuserState] = useState("");
+  const [userState, setuserState] = useState();
    
   useEffect(() => {
     const decode = logedindata();

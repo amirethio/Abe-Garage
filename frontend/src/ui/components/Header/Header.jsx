@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./../../../assets/images/logo.png";
 import useAuth from "../../../hook/useAuth";
 import { useNavigate } from "react-router-dom";
 function Header() {
   const context = useAuth();
-  console.log(context);
-
   const logout = () => {
+    context.setuserState(false);
     localStorage.removeItem("authToken");
-    context.setuserState(!context.userState);
   };
   const naviaget = useNavigate();
 

@@ -50,8 +50,8 @@ function Login() {
         setErrors(submitForm.message);
         return;
       } else {
+        context.setuserState(true);
         localStorage.setItem("authToken", submitForm?.data?.employee_token);
-        context.setuserState(!context.userState);
         navigate("/");
       }
     } catch (err) {
