@@ -18,7 +18,7 @@ function App() {
         <Route
           path="/add-employee"
           element={
-            <PrivateAuth role={[1, 2, 3]}>
+            <PrivateAuth role={[1 ,2, 3]}>
               <AddEmployee />
             </PrivateAuth>
           }

@@ -54,7 +54,7 @@ function EmployeeForm() {
     return newErrors;
   };
 
-  // handle submit
+  // handle submitServerError
   const handleSubmit = async (event) => {
     event.preventDefault();
     const validateResponse = validateForm();
@@ -68,7 +68,7 @@ function EmployeeForm() {
         setServerError(data.error);
         return;
       }
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
