@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import submitEmployee from "./../../../services/employee.service";
+// Same functionality — only CSS will make it responsive
+import React, { useState } from "react";
+import {submitEmployee} from "./../../../services/employee.service";
 import { useNavigate } from "react-router-dom";
 
 function EmployeeForm() {
@@ -26,27 +26,22 @@ function EmployeeForm() {
     }));
   }
 
-  // form validation
   const validateForm = () => {
     const newErrors = {};
-    // Fname vlidation
     if (!formData.employee_first_name.trim()) {
       newErrors.name = "Name is required";
     } else if (!/^[a-zA-Z\s]+$/.test(formData.employee_first_name)) {
       newErrors.name = "Name must contain only letters";
     }
-    // email validation
     if (!formData.employee_email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.employee_email)) {
       newErrors.email = "Email format is invalid";
     }
-    // phone no
     if (!formData.employee_phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^[0-9]{10,}$/.test(formData.employee_phone)) {
-      newErrors.phone =
-        "Phone number must be at least 10 digits and contain only numbers";
+      newErrors.phone = "Phone number must be at least 10 digits";
     }
     if (!formData.employee_password.trim()) {
       newErrors.password = "Password is required";
@@ -54,7 +49,6 @@ function EmployeeForm() {
     return newErrors;
   };
 
-  // handle submitServerError
   const handleSubmit = async (event) => {
     event.preventDefault();
     const validateResponse = validateForm();
@@ -68,18 +62,18 @@ function EmployeeForm() {
         setServerError(data.error);
         return;
       }
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
   };
 
   return (
-    <section className="contact-section custom-bg pl-5">
+    <section className="contact-section custom-bg pl-5 responsive-form">
       <div className="auto-container contact-title ml-6 pl-5">
         <h2>Add a new Employee</h2>
         {ServerError && (
-          <div className="d-flex pl-md-5 ml-md-6 mt-3">
+          <div className="d-flex mt-3">
             <div
               className="alert alert-danger py-2 px-3 shadow-sm"
               role="alert"
@@ -89,13 +83,12 @@ function EmployeeForm() {
           </div>
         )}
         <div className="row clearfix">
-          <div className="form-column col-lg-7">
+          <div className="form-column col-lg-7 col-md-12">
             <div className="inner-column">
               <div className="contact-form">
                 <form id="contact-form" onSubmit={handleSubmit} noValidate>
                   <div className="row clearfix bg-light">
-                    <span></span>{" "}
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <input
                         type="email"
                         name="employee_email"
@@ -104,12 +97,12 @@ function EmployeeForm() {
                         onChange={handleChange}
                       />
                       {errors.email && (
-                        <div className="text-danger small mt-2 ml-2">
+                        <div className="text-danger small mt-2">
                           {errors.email}
                         </div>
                       )}
                     </div>
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <input
                         type="text"
                         name="employee_first_name"
@@ -118,12 +111,12 @@ function EmployeeForm() {
                         onChange={handleChange}
                       />
                       {errors.name && (
-                        <div className="text-danger small mt-2 ml-2">
+                        <div className="text-danger small mt-2">
                           {errors.name}
                         </div>
                       )}
                     </div>
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <input
                         type="text"
                         name="employee_last_name"
@@ -132,7 +125,7 @@ function EmployeeForm() {
                         onChange={handleChange}
                       />
                     </div>
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <input
                         type="text"
                         name="employee_phone"
@@ -141,25 +134,23 @@ function EmployeeForm() {
                         placeholder="Employee phone(555-555-5555)"
                       />
                       {errors.phone && (
-                        <div className="text-danger small mt-2 ml-2">
+                        <div className="text-danger small mt-2">
                           {errors.phone}
                         </div>
                       )}
                     </div>
-                    <div className="form-group col-md-12 ">
+                    <div className="form-group col-12">
                       <select
-                        // class="form-select"
-                        // aria-label="Default select example"
                         value={formData.company_role_id}
                         name="company_role_id"
                         onChange={handleChange}
                       >
                         <option value="1">Employee</option>
-                        <option value="2">manager</option>
+                        <option value="2">Manager</option>
                         <option value="3">Admin</option>
                       </select>
                     </div>
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <input
                         type="password"
                         name="employee_password"
@@ -168,14 +159,14 @@ function EmployeeForm() {
                         placeholder="* * * * * *"
                       />
                       {errors.password && (
-                        <div className="text-danger small mt-2 ml-2">
+                        <div className="text-danger small mt-2">
                           {errors.password}
                         </div>
                       )}
                     </div>
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-12">
                       <button
-                        className="theme-btn btn-style-one"
+                        className="theme-btn btn-style-one w-100"
                         type="submit"
                         data-loading-text="Please wait..."
                       >
@@ -187,7 +178,7 @@ function EmployeeForm() {
               </div>
             </div>
           </div>
-          <div className="info-column col-lg-4"></div>
+          <div className="info-column col-lg-4 d-none d-lg-block"></div>
         </div>
       </div>
     </section>

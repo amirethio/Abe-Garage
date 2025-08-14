@@ -1,6 +1,6 @@
 import axiosInstance from "../API/axiosInstance";
 
-const submitEmployee = async (formData) => {
+export const submitEmployee = async (formData) => {
   try {
     const response = await axiosInstance.post("/api/employee", formData);
     return response.data;
@@ -9,4 +9,15 @@ const submitEmployee = async (formData) => {
   }
 };
 
-export default submitEmployee;
+
+
+export const listEmployee = async () => {
+  try {
+    const response = await axiosInstance.get("/api/employees");
+    return response.data.data;
+  } catch (error) {
+    console.log(error);
+
+    return error.message;
+  }
+};
