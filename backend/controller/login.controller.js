@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 async function loginController(req, res, next) {
+  console.log("backend");
   try {
     const EmployeeExists = await loginService.login(req.body);
     if (EmployeeExists.status == "fail") {

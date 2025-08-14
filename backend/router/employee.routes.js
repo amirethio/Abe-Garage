@@ -9,11 +9,16 @@ const authorizeRoles =  require('../middlewares/role.middleware')
 router.post(
   "/api/employee",
   authMiddleware,
-  authorizeRoles(3),
+  authorizeRoles(1,3 ,2),
   employeeController.createEmployee
 )
 
-
+router.get(
+  "/api/employees",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  employeeController.getAllEmployees
+);
 
 
 

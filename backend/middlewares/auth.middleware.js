@@ -8,9 +8,11 @@ const auth = (req, res, next) => {
 
   const decode = jwt.verify(token, SECRET_KEY, (err, decoded) => {
     if (err) {
+      console.log('we got error' , err);
+      
       return res
         .status(403)
-        .json({ sucess: "false", message: "Invalid or expired token" });
+        .json({ success: "false", error: "Invalid or expired token" });
     } else {
       req.user = decoded;
       next();

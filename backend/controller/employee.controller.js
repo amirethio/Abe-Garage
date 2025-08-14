@@ -37,4 +37,17 @@ async function createEmployee(req, res, next) {
   }
 }
 
-module.exports = { createEmployee };
+async function getAllEmployees(req, res, next) {
+  const employees = await EmployeeService.getAllEmployees();
+  if (!employees) {
+    res.status(400).json({
+      error: "Failed to get all employees!",
+    });
+  } else {
+    res.status(200).json({
+      status: "success",
+      data: employees,
+    });
+  }
+}
+module.exports = { createEmployee, getAllEmployees };
