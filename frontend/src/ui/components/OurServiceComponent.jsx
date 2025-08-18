@@ -5,7 +5,7 @@ function OurServiceComponent() {
     <section class="services-section">
       <div class="auto-container">
         <div class="sec-title style-two">
-          <h2>Our Featured Services</h2>
+          <h2>Our Services</h2>
           <div class="text">
             Bring to the table win-win survival strategies to ensure proactive
             domination. At the end of the day, going forward, a new normal that

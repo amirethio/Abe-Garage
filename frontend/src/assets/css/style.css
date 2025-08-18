@@ -2217,7 +2217,7 @@ img {
 
 .services-section {
     position: relative;
-    padding: 100px 0 170px;
+    padding: 50px 0 70px;
     background: #f5f4f7 url(../images/resource/pattern.png);
 }
 
@@ -2302,7 +2302,7 @@ img {
 
 .why-choose-us {
     position: relative;
-    /* padding: 100px 0; */
+    padding: 50px 0;
 }
 
 .why-choose-us .icon-box {

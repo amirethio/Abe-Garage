@@ -1,21 +1,24 @@
 import React from "react";
-import bgImage from "./../../../assets/images/misc/bottomVideo.png";
 import { FaPlay } from "react-icons/fa";
 
-function BottomVideo({ text, video, page }) {
+function BottomVideo({ text, video = false, page, img ,height }) {
   return (
     <section
-      className="video-section position-relative d-flex align-items-center text-white"
+      className="video-section position-relative d-flex align-items-center text-white "
       style={{
-        backgroundImage: `url(${bgImage})`,
+        // backgroundImage: `url(${bgImage1})`,
+        backgroundImage: `url(${img})`,
         backgroundSize: "cover",
         backgroundPosition: "top center",
-        height: "400px",
+        height: `${height}`,
       }}
     >
       <div
-        className="position-absolute top-0 start-0 w-100 h-100"
-        // style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
+        className="position-absolute top-0 start-0 w-100"
+        style={{
+        //   backgroundColor: `${!video ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0)"}`,
+          height: "420px",
+        }}
       ></div>
 
       {/* Content aligned left */}
@@ -37,7 +40,7 @@ function BottomVideo({ text, video, page }) {
                   width: "80px",
                   height: "80px",
                   transition: "transform 0.3s ease",
-                  marginRight:"15px"
+                  marginRight: "15px",
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.transform = "scale(1.1)")

@@ -8,6 +8,8 @@ import PrivateAuth from "./AUTH/PrivateAuth";
 import NotAuthorized from "./ui/pages/NotAuthorized";
 import Employee from "./ui/pages/admin/Employee";
 import About from "./ui/pages/About";
+import Contact from "./ui/pages/Contact";
+import Services from "./ui/pages/Services";
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route
           path="/admin/add-employee"
