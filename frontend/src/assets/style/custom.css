@@ -355,3 +355,32 @@ input:disabled {
     width: 100% !important;
   }
 }
+
+
+/* header */
+.main-header .link-btn a {
+  color: white;
+}
+.btn-style-zero:hover {
+  color: white;
+}
+.page-breadcrumb li{
+  margin-right: 0;
+  padding-right: 10px;
+}
+.video-section h2 {
+    margin-bottom:50px;
+}
+.about-section-three {
+    padding: 100px 0 55px;
+}
+.about-section {
+    position: relative;
+    padding: 75px 0 65px;
+}
+.why-choose-us .list li {
+    padding-left: 0px;
+}
+.why-img{
+  padding-right: 0;
+}

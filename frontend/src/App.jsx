@@ -7,6 +7,7 @@ import Login from "./ui/pages/Login";
 import PrivateAuth from "./AUTH/PrivateAuth";
 import NotAuthorized from "./ui/pages/NotAuthorized";
 import Employee from "./ui/pages/admin/Employee";
+import About from "./ui/pages/About";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route

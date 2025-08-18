@@ -27,7 +27,7 @@ function Header() {
             <div className="right-column">
               <div className="phone-number mr-5">
                 {context?.userData
-                  ? `Hello 👋 ${context?.userData?.employee_first_name}`
+                  ? `Welcome 👋 ${context?.userData?.employee_first_name}`
                   : "Make Appointment"}
               </div>
             </div>
@@ -76,11 +76,17 @@ function Header() {
               <div className="search-btn"></div>
               <div className="link-btn">
                 {context?.userData ? (
-                  <a className="theme-btn btn-style-one" onClick={logout}>
+                  <a
+                    className="theme-btn  btn-style-zero"
+                    onClick={logout}
+                  >
                     Logout
                   </a>
                 ) : (
-                  <a className="theme-btn btn-style-one" onClick={handlelogin}>
+                  <a
+                    className="theme-btn btn-style-zero"
+                    onClick={handlelogin}
+                  >
                     Login
                   </a>
                 )}
@@ -111,7 +117,10 @@ function Header() {
                 </div>
                 <div className="search-btn"></div>
                 <div className="link-btn">
-                  <a href="/login" className="theme-btn btn-style-one">
+                  <a
+                    href="/login"
+                    className="theme-btn btn-style-one btn-style-zero"
+                  >
                     Login
                   </a>
                 </div>
