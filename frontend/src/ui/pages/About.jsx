@@ -5,6 +5,7 @@ import AboutSectionComponent from "../components/AboutSectionComponent";
 import WhyChooseUs from "../components/WhyChooseUs";
 import ScheduleAppointment from "../components/ScheduleAppointment";
 import bgImage from "./../../assets/images/misc/skill1.png"
+import bgImage2 from "./../../assets/images/misc/skill4.png";
 function About() {
   return (
     <>
@@ -21,7 +22,7 @@ function About() {
       <BottomVideo
         text="We are leader in Car Mechanical Work "
         video={true}
-        img={true}
+        img={bgImage2}
       />
       <ScheduleAppointment />
     </>
