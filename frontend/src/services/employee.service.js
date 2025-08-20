@@ -21,3 +21,23 @@ export const listEmployee = async () => {
     return error.message;
   }
 };
+
+export const singleEmployee = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/api/employee/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
+
+
+export const updateEmployee = async (formData) => {
+   try {
+     const response = await axiosInstance.put("/api/employees", formData);
+     return response.data;
+   } catch (error) {
+     return error.response.data;
+   }
+}

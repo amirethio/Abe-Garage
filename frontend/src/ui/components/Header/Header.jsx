@@ -2,16 +2,13 @@ import React from "react";
 import logo from "./../../../assets/images/logo.png";
 import useAuth from "../../../hook/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 function Header() {
   const context = useAuth();
   const logout = () => {
     context.setuserState(false);
     localStorage.removeItem("authToken");
-  };
-  const naviaget = useNavigate();
-
-  const handlelogin = () => {
-    naviaget("/login");
   };
   return (
     <header className="main-header header-style-one">
@@ -40,9 +37,9 @@ function Header() {
           <div className="inner-container">
             <div className="logo-box">
               <div className="logo">
-                <a href="/">
+                <Link to="/">
                   <img src={logo} alt="" />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="right-column">
@@ -58,37 +55,40 @@ function Header() {
                   >
                     <ul className="navigation">
                       <li className="dropdown">
-                        <a href="/">Home</a>
+                        <Link to="/">Home</Link>
                       </li>
                       <li className="dropdown">
-                        <a href="/about">About Us</a>
+                        <Link to="/about">About Us</Link>
                       </li>
                       <li className="dropdown">
-                        <a href="/services">Services</a>
+                        <Link to="/services">Services</Link>
                       </li>
                       <li>
-                        <a href="/contact">Contact Us</a>
+                        <Link to="/contact">Contact Us</Link>
                       </li>
                     </ul>
                   </div>
                 </nav>
               </div>
-              <div className="search-btn"></div>
+              {context?.userData?.employee_role == 3 ? (
+                <div className="search-btn ">
+                  <Link to="/admin" className="admin-panel">
+                    Dashboard
+                  </Link>
+                </div>
+              ) : (
+                <div className="search-btn "></div>
+              )}
+
               <div className="link-btn">
                 {context?.userData ? (
-                  <a
-                    className="theme-btn  btn-style-zero"
-                    onClick={logout}
-                  >
+                  <Link className="theme-btn  btn-style-zero" onClick={logout}>
                     Logout
-                  </a>
+                  </Link>
                 ) : (
-                  <a
-                    className="theme-btn btn-style-zero"
-                    onClick={handlelogin}
-                  >
+                  <Link className="theme-btn btn-style-zero" to={'/login'}>
                     Login
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -102,9 +102,9 @@ function Header() {
             <div className="inner-container">
               <div className="logo-box">
                 <div className="logo">
-                  <a href="/">
+                  <Link to="/">
                     <img src={logo} alt="" />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="right-column">
@@ -117,12 +117,12 @@ function Header() {
                 </div>
                 <div className="search-btn"></div>
                 <div className="link-btn">
-                  <a
-                    href="/login"
+                  <Link
+                    to="/login"
                     className="theme-btn btn-style-one btn-style-zero"
                   >
                     Login
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -138,9 +138,9 @@ function Header() {
 
         <nav className="menu-box">
           <div className="nav-logo">
-            <a href="index.html">
+            <Link to="index.html">
               <img src={logo} alt="" title="" />
-            </a>
+            </Link>
           </div>
           <div className="menu-outer"></div>
         </nav>

@@ -1,59 +1,56 @@
+
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { format } from "date-fns";
-import { listEmployee } from "../../../services/employee.service";
-import { Link } from "react-router-dom";
-function EmployeeList() {
-  const [employees, setEmployees] = useState([]);
+import { listCustomers } from "../../../services/customer.service";
 
-  useEffect(() => {
-    listEmployee().then((data) => setEmployees(data));
-  }, []);
+function CustomerList() {
+    const [customers, setCustomers] = useState([]);
+
+    useEffect(() => {
+      listCustomers().then((data) => setCustomers(data));
+    }, []);
 
   return (
     <div className="admin-right-side p-4">
       <section className="contact-section">
         <div className="contact-title mb-4">
-          <h2>Employees</h2>
+          <h2>Customers</h2>
         </div>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>Active</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
               <th>Phone</th>
               <th>Added Date</th>
-              <th>Role</th>
+              <th>Active</th>
               <th>Edit/Delete</th>
             </tr>
           </thead>
           <tbody>
-            {employees.length ? (
-              employees.map((employee) => (
-                <tr key={employee.employee_id}>
-                  <td>{employee.active_employee ? "Yes" : "No"}</td>
-                  <td>{employee.employee_first_name}</td>
-                  <td>{employee.employee_last_name}</td>
-                  <td>{employee.employee_email}</td>
-                  <td>{employee.employee_phone}</td>
+            {customers.length ? (
+              customers.map((customer) => (
+                <tr key={customer.customer_id}>
+                  <td>{customer.customer_first_name}</td>
+                  <td>{customer.customer_last_name}</td>
+                  <td>{customer.customer_email}</td>
+                  <td>{customer.customer_phone_number}</td>
                   <td>
                     {format(
-                      new Date(employee.added_date),
+                      new Date(customer.customer_added_date),
                       "MM - dd - yyyy | HH:mm"
                     )}
                   </td>
-                  <td>{employee.company_role_name}</td>
+                  <td>{customer.active_customer_status ? "Yes" : "No"}</td>
                   <td>
                     <div className="edit-delete-icons">
                       <Button variant="warning" size="sm" className="me-2">
-                        <Link to={`/admin/${employee.employee_id}/edit`}>
-                          Edit
-                        </Link>
+                        Edit
                       </Button>
                       <Button variant="danger" size="sm">
-                        <Link to={``}>Delete</Link>
+                        Delete
                       </Button>
                     </div>
                   </td>
@@ -62,7 +59,7 @@ function EmployeeList() {
             ) : (
               <tr>
                 <td colSpan={8} className="text-center py-3">
-                  No employees found
+                  No Customers found
                 </td>
               </tr>
             )}
@@ -73,4 +70,12 @@ function EmployeeList() {
   );
 }
 
-export default EmployeeList;
+export default CustomerList
+
+
+
+
+
+  
+ 
+   

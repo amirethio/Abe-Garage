@@ -10,6 +10,10 @@ import Employee from "./ui/pages/admin/Employee";
 import About from "./ui/pages/About";
 import Contact from "./ui/pages/Contact";
 import Services from "./ui/pages/Services";
+import Admin from "./ui/pages/admin/Admin";
+import AddCustomers from "./ui/pages/admin/AddCustomers";
+import Customer from "./ui/pages/admin/Customer";
+import EditEmployee from "./ui/pages/admin/EditEmployee";
 
 function App() {
   return (
@@ -24,18 +28,50 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route
+          path="/admin"
+          element={
+            <PrivateAuth role={[3]}>
+              <Admin />
+            </PrivateAuth>
+          }
+        />
+        <Route
           path="/admin/add-employee"
           element={
-            <PrivateAuth role={[1]}>
+            <PrivateAuth role={[3]}>
               <AddEmployee />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/add-customers"
+          element={
+            <PrivateAuth role={[3]}>
+              <AddCustomers />
             </PrivateAuth>
           }
         />
         <Route
           path="/admin/employees"
           element={
-            <PrivateAuth role={[1]}>
+            <PrivateAuth role={[3]}>
               <Employee />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/:id/edit"
+          element={
+            <PrivateAuth role={[3]}>
+              <EditEmployee />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/customers"
+          element={
+            <PrivateAuth role={[3]}>
+              <Customer />
             </PrivateAuth>
           }
         />

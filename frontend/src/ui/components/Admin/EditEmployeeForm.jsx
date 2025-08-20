@@ -1,22 +1,30 @@
-// Same functionality — only CSS will make it responsive
-import React, { useState } from "react";
-import {submitEmployee} from "./../../../services/employee.service";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  updateEmployee,
+  singleEmployee,
+} from "./../../../services/employee.service";
+import {  useParams } from "react-router-dom";
 
-function EmployeeForm() {
-  const [formData, setFormData] = useState({
-    employee_email: "",
+
+
+
+function EditEmployeeForm() {
+  const { id } = useParams();
+  const InitalialState = {
+    employee_id: id,
     employee_first_name: "",
     employee_last_name: "",
     employee_phone: "",
-    employee_password: "",
     company_role_id: 1,
     active_employee: 1,
-  });
+  };
+  const [formData, setFormData] = useState(InitalialState);
   const [errors, setErrors] = useState({});
   const [ServerError, setServerError] = useState("");
-  const navigate = useNavigate();
+  const [sucess, setSucess] = useState("");
+const [employee , setEmployee] =  useState({})
 
+// functions to handle changes
   function handleChange(event) {
     setErrors({});
     const { value, name } = event.target;
@@ -25,6 +33,19 @@ function EmployeeForm() {
       [name]: value,
     }));
   }
+  const handleChange1 = (event) => {
+    if (event.target.checked ==  true){
+      setFormData((prev) => ({
+        ...prev,
+        active_employee:1,
+      }));
+    }else{
+      setFormData((prev) => ({
+        ...prev,
+        active_employee: 0,
+      }));
+    }
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -33,18 +54,10 @@ function EmployeeForm() {
     } else if (!/^[a-zA-Z\s]+$/.test(formData.employee_first_name)) {
       newErrors.name = "Name must contain only letters";
     }
-    if (!formData.employee_email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.employee_email)) {
-      newErrors.email = "Email format is invalid";
-    }
     if (!formData.employee_phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^[0-9]{10,}$/.test(formData.employee_phone)) {
       newErrors.phone = "Phone number must be at least 10 digits";
-    }
-    if (!formData.employee_password.trim()) {
-      newErrors.password = "Password is required";
     }
     return newErrors;
   };
@@ -57,21 +70,35 @@ function EmployeeForm() {
       return;
     }
     try {
-      const data = await submitEmployee(formData);
+      const data = await updateEmployee(formData);
       if (data.success == "false") {
         setServerError(data.error);
+        setFormData(InitalialState);
         return;
       }
-     setServerError("Registered Sucessfully")
+      setSucess("Updated sucessfully");
+      setFormData(InitalialState)
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
   };
 
+  useEffect(()=>{
+ singleEmployee(id).then((res) => setEmployee(res[0]));
+ 
+ 
+  },[])
+
   return (
     <section className="contact-section custom-bg pl-5 responsive-form">
+      {console.log(formData)}
       <div className="auto-container contact-title ml-6 pl-5">
-        <h2>Add a new Employee</h2>
+        <h2>
+          Edit :{" "}
+          {employee?.employee_first_name + " " + employee?.employee_last_name}
+          <h3>Employee Email : {employee?.employee_email}</h3>
+        </h2>
+
         {ServerError && (
           <div className="d-flex mt-3">
             <div
@@ -82,26 +109,22 @@ function EmployeeForm() {
             </div>
           </div>
         )}
+        {sucess && (
+          <div className="d-flex mt-3">
+            <div
+              className="alert alert-success py-2 px-3 shadow-sm"
+              role="alert"
+            >
+              {sucess}
+            </div>
+          </div>
+        )}
         <div className="row clearfix">
           <div className="form-column col-lg-7 col-md-12">
             <div className="inner-column">
               <div className="contact-form">
                 <form id="contact-form" onSubmit={handleSubmit} noValidate>
                   <div className="row clearfix bg-light">
-                    <div className="form-group col-12">
-                      <input
-                        type="email"
-                        name="employee_email"
-                        value={formData.employee_email}
-                        placeholder="Employee email"
-                        onChange={handleChange}
-                      />
-                      {errors.email && (
-                        <div className="text-danger small mt-2">
-                          {errors.email}
-                        </div>
-                      )}
-                    </div>
                     <div className="form-group col-12">
                       <input
                         type="text"
@@ -152,18 +175,19 @@ function EmployeeForm() {
                     </div>
                     <div className="form-group col-12">
                       <input
-                        type="password"
-                        name="employee_password"
-                        value={formData.employee_password}
-                        onChange={handleChange}
-                        placeholder="* * * * * *"
+                        type="checkbox"
+                        id="activeCheck"
+                        name="vehicle3"
+                        checked={formData.active_employee}
+                        onChange={handleChange1}
                       />
-                      {errors.password && (
-                        <div className="text-danger small mt-2">
-                          {errors.password}
-                        </div>
-                      )}
+                      <label for="activeCheck">
+                        {" "}
+                        <h5>&nbsp; Is active Employee</h5>
+                      </label>
+                      <br></br>
                     </div>
+
                     <div className="form-group col-12">
                       <button
                         className="theme-btn btn-style-one w-100"
@@ -185,4 +209,4 @@ function EmployeeForm() {
   );
 }
 
-export default EmployeeForm;
+export default EditEmployeeForm;
