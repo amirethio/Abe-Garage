@@ -19,7 +19,19 @@ router.get(
   authorizeRoles(1, 3, 2),
   employeeController.getAllEmployees
 );
+router.put(
+  "/api/employees",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  employeeController.updateEmployee
+);
 
+router.get(
+  "/api/employee/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  employeeController.getSingleEmployee
+);
 
 
 

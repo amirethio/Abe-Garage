@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS `customer_info` (
   PRIMARY KEY (customer_info_id),
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id)
 ) ENGINE = InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS `customer_vehicle_info` (
   `vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,

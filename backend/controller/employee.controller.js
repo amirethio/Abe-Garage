@@ -50,4 +50,40 @@ async function getAllEmployees(req, res, next) {
     });
   }
 }
-module.exports = { createEmployee, getAllEmployees };
+async function updateEmployee(req, res, next) {
+
+
+try {
+    const employees = await EmployeeService.updateEmployee(req.body);
+res.status(200).json(employees)
+
+} catch (error) {
+  res.status(200).json({
+    sucess: false,
+    message: "something went wrong",
+  });
+}
+}
+
+async function getSingleEmployee(req, res, next) {
+    const id = req.params.id;
+  const employees = await EmployeeService.getSingleEmployee(id);
+  if (!employees) {
+    res.status(400).json({
+      error: "Failed to get all employees!",
+    });
+  } else {
+    res.status(200).json({
+      status: "success",
+      data: employees,
+    });
+  }
+}
+
+
+module.exports = {
+  createEmployee,
+  getAllEmployees,
+  updateEmployee,
+  getSingleEmployee,
+};
