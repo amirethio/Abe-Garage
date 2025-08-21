@@ -48,7 +48,9 @@ function EmployeeList() {
                   <td>
                     <div className="edit-delete-icons">
                       <Button variant="warning" size="sm" className="me-2">
-                        <Link to={`/admin/${employee.employee_id}/edit`}>
+                        <Link
+                          to={`/admin/${employee.employee_id}/edit-employee`}
+                        >
                           Edit
                         </Link>
                       </Button>

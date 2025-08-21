@@ -282,10 +282,10 @@ input:disabled {
   color: white;
   height: 50px;
   width: 100%;
-   display: flex;
-    align-items: center;
-    padding-left: 22px;
-    /* justify-content: center; */
+  display: flex;
+  align-items: center;
+  padding-left: 22px;
+  /* justify-content: center; */
 }
 .navigation-menu a {
   background-color: #1e2331;
@@ -316,7 +316,6 @@ input:disabled {
   .navigation-menu a {
     font-size: 14px;
     padding: 8px;
-   
   }
   .navigation-bg li {
     font-size: 14px;
@@ -392,4 +391,28 @@ input:disabled {
   font-weight: 600;
   line-height: 3px;
   /* color: #a37474; */
+}
+
+.serch-wrapper {
+  display: flex;
+  border: grey 3px solid;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.serch-wrapper input {
+  border: none;
+}
+
+.serch-wrapper div{
+  margin-right: 15px;
+}
+.all-one{
+  border-radius: 19px;
+
+  border: 1px solid grey;
+}
+.service-block-one a {
+    color:black;
 }

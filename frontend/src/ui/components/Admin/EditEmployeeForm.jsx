@@ -87,18 +87,16 @@ const [employee , setEmployee] =  useState({})
  singleEmployee(id).then((res) => setEmployee(res[0]));
  
  
-  },[])
+  },[sucess , id])
 
   return (
     <section className="contact-section custom-bg pl-5 responsive-form">
-      {console.log(formData)}
       <div className="auto-container contact-title ml-6 pl-5">
-        <h2>
+        <h2 style={{marginBottom:"30px"}}>
           Edit :{" "}
           {employee?.employee_first_name + " " + employee?.employee_last_name}
-          <h3>Employee Email : {employee?.employee_email}</h3>
         </h2>
-
+        <h3 style={{marginBottom:"30px"}}>Employee Email : {employee?.employee_email}</h3>
         {ServerError && (
           <div className="d-flex mt-3">
             <div
@@ -194,7 +192,7 @@ const [employee , setEmployee] =  useState({})
                         type="submit"
                         data-loading-text="Please wait..."
                       >
-                        <span>ADD EMPLOYEE</span>
+                        <span>UPDATE EMPLOYEE</span>
                       </button>
                     </div>
                   </div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { format } from "date-fns";
 import { listCustomers } from "../../../services/customer.service";
+import { Link } from "react-router-dom";
 
 function CustomerList() {
     const [customers, setCustomers] = useState([]);
@@ -47,7 +48,9 @@ function CustomerList() {
                   <td>
                     <div className="edit-delete-icons">
                       <Button variant="warning" size="sm" className="me-2">
-                        Edit
+                        <Link to={`/admin/${customer.customer_hash}/edit-customer`}>
+                          Edit
+                        </Link>
                       </Button>
                       <Button variant="danger" size="sm">
                         Delete

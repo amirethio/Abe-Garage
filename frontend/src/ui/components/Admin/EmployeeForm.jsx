@@ -72,6 +72,8 @@ function EmployeeForm() {
     <section className="contact-section custom-bg pl-5 responsive-form">
       <div className="auto-container contact-title ml-6 pl-5">
         <h2>Add a new Employee</h2>
+
+        
         {ServerError && (
           <div className="d-flex mt-3">
             <div

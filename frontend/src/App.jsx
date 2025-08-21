@@ -14,6 +14,8 @@ import Admin from "./ui/pages/admin/Admin";
 import AddCustomers from "./ui/pages/admin/AddCustomers";
 import Customer from "./ui/pages/admin/Customer";
 import EditEmployee from "./ui/pages/admin/EditEmployee";
+import EditCustomer from "./ui/pages/admin/EditCustomer";
+import NewOrder from "./ui/pages/admin/NewOrder";
 
 function App() {
   return (
@@ -60,7 +62,7 @@ function App() {
           }
         />
         <Route
-          path="/admin/:id/edit"
+          path="/admin/:id/edit-employee"
           element={
             <PrivateAuth role={[3]}>
               <EditEmployee />
@@ -72,6 +74,23 @@ function App() {
           element={
             <PrivateAuth role={[3]}>
               <Customer />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/:hash/edit-customer"
+          element={
+            <PrivateAuth role={[3]}>
+              <EditCustomer />
+            </PrivateAuth>
+          }
+        />
+        {/* order */}
+        <Route
+          path="/admin/new-order"
+          element={
+            <PrivateAuth role={[3]}>
+              <NewOrder />
             </PrivateAuth>
           }
         />
