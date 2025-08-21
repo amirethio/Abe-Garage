@@ -1,7 +1,6 @@
 const db = require("./../config/db.config");
 const { v4: uuidv4 } = require("uuid");
 
-
 async function AddCustomer(customer_data) {
   try {
     const publicId = uuidv4();
@@ -47,8 +46,6 @@ async function AddCustomer(customer_data) {
   }
 }
 
-
-
 async function fetchCustomer() {
   try {
     const sql = `SELECT
@@ -64,17 +61,76 @@ LEFT JOIN customer_info
     ON customer_identifier.customer_id = customer_info.customer_id;
   `;
     const response = await db.query(sql);
-    return response
+    return response;
   } catch (error) {
     return {
-      sucess:false,
-      message:"something went wrong"
-    }
-    
+      sucess: false,
+      message: "something went wrong",
+    };
   }
 }
 
+async function getSingleCustomer(customerHash) {
+  const sql = `SELECT
+    customer_identifier.customer_email,
+    customer_identifier.customer_id,
+    customer_identifier.customer_phone_number,
+    customer_identifier.customer_added_date,
+    customer_identifier.customer_hash,
+    customer_info.customer_first_name,
+    customer_info.customer_last_name,
+    customer_info.active_customer_status
+FROM customer_identifier
+LEFT JOIN customer_info
+    ON customer_identifier.customer_id = customer_info.customer_id where customer_hash = ? ;
+  `;
+  const rows = await db.query(sql, [customerHash]);
+  return rows;
+}
+
+async function updateCustomer(new_data) {
+  try {
+    const {
+      customer_first_name,
+      customer_last_name,
+      customer_phone_number,
+      active_customer_status,
+      customer_id,
+      customer_hash,
+    } = new_data;
+    const sql = ` update customer_info set customer_first_name = ? , customer_last_name = ? ,active_customer_status = ? where  customer_id = ?`;
+    const response = await db.query(sql, [
+      customer_first_name,
+      customer_last_name,
+      active_customer_status,
+      customer_id,
+    ]);
+// console.log(response , "response 1");
+
+    const sql1 = ` update customer_identifier set customer_phone_number = ?  where  customer_hash = ?`;
+    const response1 = await db.query(sql1, [
+      customer_phone_number,
+      customer_hash,
+    ]);
 
 
 
-module.exports = { AddCustomer, fetchCustomer };
+    return {
+      sucess: true,
+      message: "sucessfully update the employee",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      sucess: false,
+      message: "something went wrong",
+    };
+  }
+}
+
+module.exports = {
+  AddCustomer,
+  fetchCustomer,
+  getSingleCustomer,
+  updateCustomer,
+};

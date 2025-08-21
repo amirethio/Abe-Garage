@@ -10,15 +10,23 @@ router.post(
   authorizeRoles(3, 2),
   customer.AddCustomer
 );
-
-
 router.get(
   "/api/customers",
   authMiddleware,
   authorizeRoles(1,3, 2),
   customer.listCustomer
 );
+router.get(
+  "/api/customer/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  customer.getSingleCustomer
+);
 
-
-
+router.put(
+  "/api/customer",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  customer.updateCustomer
+);
 module.exports = router;
