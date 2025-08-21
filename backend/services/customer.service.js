@@ -128,9 +128,42 @@ async function updateCustomer(new_data) {
   }
 }
 
+
+async function searchCustomers(query) {
+  try {
+    const sql = `SELECT
+        ci.customer_email,
+        ci.customer_phone_number,
+        ci.customer_added_date,
+        ci.customer_hash,
+        info.customer_first_name,
+        info.customer_last_name,
+        info.active_customer_status
+      FROM customer_identifier ci
+      LEFT JOIN customer_info info
+        ON ci.customer_id = info.customer_id
+      WHERE info.customer_first_name LIKE ? 
+         OR info.customer_last_name LIKE ?
+      LIMIT 10; ;
+  `;
+    const response = await db.query(sql, [`%${query}%`, `%${query}%`]);
+    return response;
+  } catch (error) {
+    console.log(error);
+    
+    return {
+      sucess: false,
+      message: "something went wrong",
+    };
+  }
+}
+
+
+
 module.exports = {
   AddCustomer,
   fetchCustomer,
   getSingleCustomer,
   updateCustomer,
+  searchCustomers,
 };

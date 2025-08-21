@@ -29,4 +29,12 @@ router.put(
   authorizeRoles(1, 3, 2),
   customer.updateCustomer
 );
+
+router.get(
+  "/api/search-customers",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  customer.searchCustomers
+);
+
 module.exports = router;

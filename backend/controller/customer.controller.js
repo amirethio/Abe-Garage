@@ -53,9 +53,29 @@ async function updateCustomer(req, res, next) {
   }
 }
 
+
+async function searchCustomers(req,res,next) {
+
+  try {
+    const response = await customerService.searchCustomers(req.query.query);
+    res.send(response)
+  } catch (error) {
+    
+  }
+
+
+
+
+}
+
+
+
+
+
 module.exports = {
   AddCustomer,
   listCustomer,
   getSingleCustomer,
   updateCustomer,
+  searchCustomers,
 };
