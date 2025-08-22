@@ -12,4 +12,10 @@ router.post(
   VehicleController.addVehicle
 );
 
+router.get(
+  "/api/vehicle/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  VehicleController.getVehicles
+);
 module.exports = router;

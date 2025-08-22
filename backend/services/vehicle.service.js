@@ -28,10 +28,10 @@ async function addVehicle(vehicle_data) {
       vehicle_serial,
       vehicle_color,
     ]);
- 
+
     return {
-      sucess:true ,
-      message:"sucessfully added the vehicle"
+      sucess: true,
+      message: "sucessfully added the vehicle",
     };
   } catch (error) {
     return {
@@ -41,6 +41,22 @@ async function addVehicle(vehicle_data) {
   }
 }
 
+async function getVehicles(id) {
+  try {
+    const sql = ` select * from customer_vehicle_info where customer_id = ?`;
+    const response = db.query(sql, [id]);
+    console.log(response);
+    return response;
+  } catch (error) {
+    return {
+      sucess: false,
+      message: "someting went wrong",
+    };
+  }
+
+
+}
 module.exports = {
   addVehicle,
+  getVehicles,
 };

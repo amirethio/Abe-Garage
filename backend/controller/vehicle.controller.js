@@ -12,6 +12,18 @@ async function addVehicle(req, res, next) {
   }
 }
 
+async function getVehicles(req, res, next) {
+  try {
+    const response = await VehicleService.getVehicles(req.params.id);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(501).json({
+      sucess: false,
+      message: "someting went wrong",
+    });
+  }
+}
 module.exports = {
   addVehicle,
+  getVehicles,
 };
