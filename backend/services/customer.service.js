@@ -133,6 +133,7 @@ async function searchCustomers(query) {
   try {
     const sql = `SELECT
         ci.customer_email,
+        ci.customer_id,
         ci.customer_phone_number,
         ci.customer_added_date,
         ci.customer_hash,
