@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-// import { submitvehicle } from "../../../../services/vehicle.service";
+import { submitvehicle } from "../../../../services/vehicle.service";
 import { useNavigate } from "react-router-dom";
 
-function Addvehicle() {
+function Addvehicle({ id }) {
   const [formData, setFormData] = useState({
+    customer_id: id,
     vehicle_year: "",
     vehicle_make: "",
     vehicle_model: "",
@@ -14,13 +15,11 @@ function Addvehicle() {
     vehicle_color: "",
   });
 
-
   const [errors, setErrors] = useState({});
   const [ServerError, setServerError] = useState("");
+  const [sucess, setSucess] = useState("");
   const navigate = useNavigate();
 
-
-  
   function handleChange(event) {
     setErrors({});
     const { value, name } = event.target;
@@ -30,33 +29,25 @@ function Addvehicle() {
     }));
   }
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrors("");
+    setSucess("");
     try {
       const data = await submitvehicle(formData);
-      if (data.success == "false") {
-        setServerError(data.error);
+      if (data.sucess == "false") {
+        setServerError(data.message);
         return;
       }
-      setServerError("Registered Sucessfully");
+      setSucess("Added sucessfully");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
   };
 
-
-
-
-
   return (
-    <section className="contact-section custom-bg pl-5 responsive-form">
-       {
-        console.log(formData)
-        
-       } 
-      <div className="auto-container contact-title ml-6 pl-5">
+    <section className="contact-section  pl-5 responsive-form container mt-5 ">
+      <div className="auto-container contact-title ml-6 pl-5card shadow p-4 add-vechile">
         <h2>Add a new vehicle</h2>
 
         {ServerError && (
@@ -69,12 +60,22 @@ function Addvehicle() {
             </div>
           </div>
         )}
+        {sucess && (
+          <div className="d-flex mt-3">
+            <div
+              className="alert alert-success py-2 px-3 shadow-sm"
+              role="alert"
+            >
+              {sucess}
+            </div>
+          </div>
+        )}
         <div className="row clearfix">
           <div className="form-column col-lg-7 col-md-12">
             <div className="inner-column">
               <div className="contact-form">
                 <form id="contact-form" onSubmit={handleSubmit} noValidate>
-                  <div className="row clearfix bg-light">
+                  <div className="row clearfix ">
                     <div className="form-group col-12">
                       <input
                         type="email"

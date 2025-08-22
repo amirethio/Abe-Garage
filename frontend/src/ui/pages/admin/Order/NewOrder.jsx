@@ -1,6 +1,6 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu";
-import ChooseCustomer from "../../../components/Admin/Customer/ChooseCustomer";
+import ChooseCustomer from "../../../components/Admin/Order/ChooseCustomer";
 
 function NewOrder() {
   return (

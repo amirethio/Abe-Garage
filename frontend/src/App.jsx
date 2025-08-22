@@ -16,7 +16,7 @@ import Customer from "./ui/pages/admin/Customer/Customer";
 import EditEmployee from "./ui/pages/admin/Employee/EditEmployee";
 import EditCustomer from "./ui/pages/admin/Customer/EditCustomer";
 import NewOrder from "./ui/pages/admin/Order/NewOrder";
-import AddVechile from "./ui/components/Vechile/AddVechile";
+
 
 function App() {
   return (
@@ -29,7 +29,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/vechile" element={<AddVechile />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route
           path="/admin"

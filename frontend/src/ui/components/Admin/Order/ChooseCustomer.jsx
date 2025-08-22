@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import CustomerSearch from "./CustomerSearch";
-import SelectedCustomer from "./SelectedCustomer";
+import SelectedCustomer from "../../Admin/Order/SelectedCustomer";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Addvehicle from "../Vechile/AddVechile";
 
 function ChooseCustomer() {
   const [query, setQuery] = useState("");
@@ -33,6 +34,11 @@ function ChooseCustomer() {
             setFocus(false);
           }}
         />
+      )}
+      {selectedCustomer?.customer_id && (
+        <div>
+          <Addvehicle id={selectedCustomer?.customer_id} />
+        </div>
       )}
     </section>
   );
