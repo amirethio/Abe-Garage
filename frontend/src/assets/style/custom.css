@@ -395,7 +395,7 @@ input:disabled {
 
 .serch-wrapper {
   display: flex;
-  border: grey 3px solid;
+  border: grey 1px solid;
   border-radius: 15px;
   justify-content: space-between;
   align-items: center;
@@ -403,14 +403,15 @@ input:disabled {
 }
 .serch-wrapper input {
   border: none;
+  margin-left: 10px;
 }
 
 .serch-wrapper div{
+  
   margin-right: 15px;
 }
 .all-one{
   border-radius: 19px;
-
   border: 1px solid grey;
 }
 .service-block-one a {

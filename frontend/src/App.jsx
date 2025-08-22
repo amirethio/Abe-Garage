@@ -1,21 +1,22 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Footer from "./ui/components/Footer/Footer";
-import Header from "./ui/components/Header/Header";
-import Home from "./ui/pages/Home";
-import AddEmployee from "./ui/pages/admin/AddEmployee";
-import Login from "./ui/pages/Login";
+import Footer from "./ui/components/Global/Footer/Footer";
+import Header from "./ui/components/Global/Header/Header";
+import Home from "./ui/pages/Global/Home";
+import AddEmployee from "./ui/pages/admin/Employee/AddEmployee";
+import Login from "./ui/pages/Global/Login";
 import PrivateAuth from "./AUTH/PrivateAuth";
-import NotAuthorized from "./ui/pages/NotAuthorized";
-import Employee from "./ui/pages/admin/Employee";
-import About from "./ui/pages/About";
-import Contact from "./ui/pages/Contact";
-import Services from "./ui/pages/Services";
+import NotAuthorized from "./ui/pages/Global/NotAuthorized";
+import Employee from "./ui/pages/admin/Employee/Employee";
+import About from "./ui/pages/Global/About";
+import Contact from "./ui/pages/Global/Contact";
+import Services from "./ui/pages/Global/Services";
 import Admin from "./ui/pages/admin/Admin";
-import AddCustomers from "./ui/pages/admin/AddCustomers";
-import Customer from "./ui/pages/admin/Customer";
-import EditEmployee from "./ui/pages/admin/EditEmployee";
-import EditCustomer from "./ui/pages/admin/EditCustomer";
-import NewOrder from "./ui/pages/admin/NewOrder";
+import AddCustomers from "./ui/pages/admin/Customer/AddCustomers";
+import Customer from "./ui/pages/admin/Customer/Customer";
+import EditEmployee from "./ui/pages/admin/Employee/EditEmployee";
+import EditCustomer from "./ui/pages/admin/Customer/EditCustomer";
+import NewOrder from "./ui/pages/admin/Order/NewOrder";
+import AddVechile from "./ui/components/Vechile/AddVechile";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/vechile" element={<AddVechile />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route
           path="/admin"
