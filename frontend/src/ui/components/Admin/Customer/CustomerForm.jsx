@@ -58,7 +58,7 @@ function CustomerForm() {
         setServerError(data.message);
         return;
       }
-      setServerError("user registered sucessfully");
+      setServerError("customer registered sucessfully");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
