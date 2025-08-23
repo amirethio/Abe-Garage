@@ -10,10 +10,7 @@ function SelectedCustomer({ user, onClose }) {
         <div className="d-flex justify-content-between align-items-start">
           {/* Left: Customer Details */}
           <div>
-            {
-              console.log(user)
-              
-            }
+    
             <h2 className="mb-2">
               {user.customer_first_name} {user.customer_last_name}
             </h2>

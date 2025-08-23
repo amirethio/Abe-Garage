@@ -16,6 +16,8 @@ import Customer from "./ui/pages/admin/Customer/Customer";
 import EditEmployee from "./ui/pages/admin/Employee/EditEmployee";
 import EditCustomer from "./ui/pages/admin/Customer/EditCustomer";
 import NewOrder from "./ui/pages/admin/Order/NewOrder";
+import Service from "./ui/pages/admin/Service/Service";
+import AdminMenu from "./ui/components/Admin/AdminMenu";
 
 
 function App() {
@@ -92,6 +94,14 @@ function App() {
           element={
             <PrivateAuth role={[3]}>
               <NewOrder />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/services"
+          element={
+            <PrivateAuth role={[3]}>
+              <Service />
             </PrivateAuth>
           }
         />

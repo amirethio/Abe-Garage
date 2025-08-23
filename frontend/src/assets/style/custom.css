@@ -1,4 +1,4 @@
-/* comming from template */
+comming from template
 
 /* Custom styles for the garage app */
 .signin-signout {
@@ -419,4 +419,27 @@ input:disabled {
 }
 .add-vechile{
   background-color: white;
+}
+.vehicle-cancel{
+  display: flex;
+  justify-content: space-between;
+}
+.form-controlu {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 1.7rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #b6b9bc;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+textarea.form-controlu {
+    height: auto;
 }

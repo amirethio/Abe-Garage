@@ -2,11 +2,20 @@ import axiosInstance from "../API/axiosInstance";
 
 export const submitvehicle = async (vechile_data) => {
   try {
-    console.log(vechile_data, "the data");
-
-    const repsose = await axiosInstance.post("/api/vehicle", vechile_data);
+      const repsose = await axiosInstance.post("/api/vehicle", vechile_data);
+      console.log(repsose);
+      
     return repsose.data;
   } catch (error) {
-    console.log(error);
+    return;
+  }
+};
+
+export const fetchVechile = async (id) => {
+  try {
+    const response = await axiosInstance(`/api/vehicle/${id}`);
+    return response.data;
+  } catch (error) {
+    return;
   }
 };

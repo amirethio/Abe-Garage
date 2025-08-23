@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FaSearch, FaHandPointUp } from "react-icons/fa";
-import { orderFetch } from "../../../../services/order.service";
+import { orderFetch } from "../../../../../services/order.service";
 
 function CustomerSearch({
   query,
@@ -31,7 +31,7 @@ function CustomerSearch({
 
   return (
     <div ref={wrapperRef} className="container mt-5">
-      <div className={focus && "all-one"}>
+      <div className={focus ? "all-one" : " "}>
         <div className="position-relative mb-4 serch-wrapper ">
           <input
             className="form-control-lg ps-5 custom-bg"
@@ -86,9 +86,9 @@ function CustomerSearch({
       {!focus && (
         <Button
           className="theme-btn btn-style-one"
-          onClick={() => navigate("/admin/add-employee")}
+          onClick={() => navigate("/admin/add-customers")}
         >
-          ADD NEW EMPLOYEE
+          ADD NEW CUSTOMER
         </Button>
       )}
     </div>

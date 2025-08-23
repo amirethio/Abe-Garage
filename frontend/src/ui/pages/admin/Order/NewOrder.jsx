@@ -1,6 +1,6 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu";
-import ChooseCustomer from "../../../components/Admin/Order/ChooseCustomer";
+import Order from "../../../components/Admin/Order/Order";
 
 function NewOrder() {
   return (
@@ -9,7 +9,7 @@ function NewOrder() {
         <AdminMenu />
       </div>
       <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0 ">
-        <ChooseCustomer />
+       <Order/>
       </div>
     </div>
   );
