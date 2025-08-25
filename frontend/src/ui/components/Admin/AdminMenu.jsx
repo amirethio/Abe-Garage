@@ -1,34 +1,62 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import {
+  FaTachometerAlt,
+  FaClipboardList,
+  FaPlusCircle,
+  FaUserTie,
+  FaUsers,
+  FaUserPlus,
+  FaTools,
+} from "react-icons/fa";
 
 function AdminMenu() {
+  const location = useLocation();
+
   const menuItems = [
-    { name: "Dashboard", path: "/admin" },
-    { name: "Orders", path: "/admin/orders" },
-    { name: "New Order", path: "/admin/new-order" },
-    { name: "Add Employee", path: "/admin/add-employee" },
-    { name: "Employee", path: "/admin/employees" },
-    { name: "Add Customer", path: "/admin/add-customers" },
-    { name: "Customers", path: "/admin/customers" },
-    { name: "Services", path: "/admin/services" },
+    { name: "Dashboard", path: "/admin", icon: <FaTachometerAlt /> },
+    { name: "Orders", path: "/admin/orders", icon: <FaClipboardList /> },
+    { name: "New Order", path: "/admin/new-order", icon: <FaPlusCircle /> },
+    { name: "Add Employee", path: "/admin/add-employee", icon: <FaUserTie /> },
+    { name: "Employee", path: "/admin/employees", icon: <FaUsers /> },
+    {
+      name: "Add Customer",
+      path: "/admin/add-customers",
+      icon: <FaUserPlus />,
+    },
+    { name: "Customers", path: "/admin/customers", icon: <FaUsers /> },
+    { name: "Services", path: "/admin/services", icon: <FaTools /> },
   ];
 
   return (
-    <div className="admin-menu-container">
-      <div className="navigation-menu">
-        <Link to="/admin">ADMIN MENU</Link>
+    <div className="admin-left-side">
+      {/* Top Header */}
+      <div className="admin-menu">
+        <h2>Admin Menu</h2>
       </div>
-      <div className="navigation-bg no-border">
-        <ul className="list-group">
-          {menuItems.map((item, index) => (
-            <li key={index} className="list-group-item">
-              <Link to={item.path} className="text-light">
-                {item.name}
+
+      {/* Navigation */}
+      <ul className="list-group">
+        {menuItems.map((item, index) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <li
+              key={index}
+              className={`list-group-item d-flex align-items-center ${
+                isActive ? "active" : ""
+              }`}
+            >
+              <Link
+                to={item.path}
+                className="d-flex align-items-center text-decoration-none flex-grow-1"
+              >
+                <span className="me-2">{item.icon}</span>
+                <span>{item.name}</span>
               </Link>
             </li>
-          ))}
-        </ul>
-      </div>
+          );
+        })}
+      </ul>
     </div>
   );
 }

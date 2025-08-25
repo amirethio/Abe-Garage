@@ -5,6 +5,7 @@ import ChooseService from "./ChooseService/ChooseService";
 import useAuth from "../../../../hook/useAuth";
 import { addOrder } from "./../../../../services/order.service";
 import { useNavigate } from "react-router-dom";
+
 function Order() {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [SelectedVhicle, setSelectedVhicle] = useState(null);
@@ -16,7 +17,7 @@ function Order() {
   });
   const [formData, setFormData] = useState({});
   const [finish, setfinish] = useState(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   if (finish) {
     console.log("it finishes and setting");
 
@@ -27,9 +28,9 @@ const navigate = useNavigate();
       order_services: selectedService.services,
       service_completed: 0,
       order_total_price: selectedService.price,
-      estimated_completion_date: "2023-04-28",
+      estimated_completion_date: selectedService.estimated_time,
       additional_request: selectedService.additional_request,
-      order_status: 1,
+      order_status: 0,
     });
 
     setfinish(false);
@@ -37,9 +38,11 @@ const navigate = useNavigate();
 
   useEffect(() => {
     addOrder(formData).then((res) => {
-      console.log(res)
-      
+   
+
       if (res.success == true) {
+        console.log("routing");
+        
         navigate("/admin/orders");
       }
     });
@@ -47,7 +50,7 @@ const navigate = useNavigate();
   return (
     <>
       <section className="contact-section custom-bg pl-5 responsive-form">
-        {console.log(formData)}
+        {/* {console.log(formData)} */}
         <ChooseCustomer
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}

@@ -15,6 +15,7 @@ textarea::placeholder {
   color: #000;
   font-style: italic;
 }
+
 /* Header */
 .main-header {
   box-shadow: rgba(9, 30, 66, 0.25) 0px 2px 5px -2px,
@@ -399,47 +400,384 @@ input:disabled {
   border-radius: 15px;
   justify-content: space-between;
   align-items: center;
-
 }
 .serch-wrapper input {
   border: none;
   margin-left: 10px;
 }
 
-.serch-wrapper div{
-  
+.serch-wrapper div {
   margin-right: 15px;
 }
-.all-one{
+.all-one {
   border-radius: 19px;
   border: 1px solid grey;
 }
 .service-block-one a {
-    color:black;
+  color: black;
 }
-.add-vechile{
+.add-vechile {
   background-color: white;
 }
-.vehicle-cancel{
+.vehicle-cancel {
   display: flex;
   justify-content: space-between;
 }
 .form-controlu {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: 1.7rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #b6b9bc;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 1.7rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #b6b9bc;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 textarea.form-controlu {
-    height: auto;
+  height: auto;
+}
+
+.admin-left-side .list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  font-size: 15px;
+  transition: background 0.2s ease-in-out;
+}
+
+.admin-left-side .list-group-item:hover {
+  background-color: #2d3658; /* slightly lighter hover */
+}
+
+.admin-left-side .list-group-item svg {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+/* Header-top scrolls away normally */
+.header-top {
+  background-color: #1e2331;
+  color: #fff;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+/* Sticky main header */
+.header-upper {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Optional: shrink on scroll */
+.header-upper.shrink {
+  top: 0;
+  position: fixed;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure parent containers allow sticky */
+.main-header,
+.auto-container,
+.inner-container {
+  overflow: visible !important;
+}
+
+.header-upper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  width: 100%;
+}
+
+.header-top {
+  transition: all 0.3s ease;
+}
+
+.header-top.hide {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* admin panel */
+/* Sidebar should stay same width, just sticky */
+.sticky-menu {
+  position: sticky;
+  top: 60px; /* height of header */
+  align-self: flex-start;
+  height: fit-content; /* keeps natural size */
+}
+
+/* Ensure content fills the space and footer pushes down */
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 120px); /* header + footer space */
+}
+
+.admin-content {
+  flex-grow: 1;
+  /* padding: 20px; */
+}
+.bgw {
+  background-color: rgb(34, 43, 72);
+}
+
+/* completed and non completed status */
+/* Base chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Completed style */
+.status-completed {
+  background: #e6f4ea;
+  color: #198754; /* Bootstrap green */
+  border: 1px solid #c6e9cd;
+}
+
+/* In Progress style */
+
+/* weapper css */
+.modal-overlay {
+  position: fixed; /* stay relative to viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* align top if needed */
+  padding-top: 100px; /* adjust if you have a sticky header height */
+  z-index: 200000000000; /* ensure it’s above sticky header */
+}
+
+
+.modal-wrapper {
+  background: #fff;
+  border-radius: 0.75rem;
+  max-width: 900px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* header css */
+.modal-header {
+  background-color: #111524; /* dark background */
+  color: #e0e0e0; /* light gray text for title */
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+.modal-overlay p {
+  margin-bottom: 0.3rem;
+}
+.header-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  color: #ffffff; /* title stays pure white for contrast */
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Status badges */
+.status-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 80px;
+  color: #fff; /* default text color for all badges */
+}
+
+.status-inprogress {
+  background-color: #ffc107; /* bright yellow */
+  color: #212529; /* dark text for readability */
+}
+
+.status-completed {
+  background-color: #28a745; /* green */
+  color: #fff;
+}
+
+.status-reserved {
+  background-color: #6c757d; /* gray */
+  color: #fff;
+}
+
+/* Optional: icon color */
+.header-title .icon {
+  color: #ffdd00; /* slightly brighter icon to stand out */
+  margin-right: 6px;
+}
+/* body dsection */
+.modal-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.rowu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* consistent spacing */
+}
+
+.col-card {
+  flex: 1 1 48%; /* take only necessary space, allow wrapping */
+  min-width: 250px; /* prevent too small columns */
+}
+
+.card-section {
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #0d6efd;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.hash-row {
+  background: #e9ecef;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.circle-btn {
+  border-radius: 50%;
+  padding: 0.3rem 0.5rem;
+}
+/* footer */
+.modal-footer {
+  background-color: #111524; /* match header background */
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #22283a;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.3rem;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  color: #111524;
+  border: none;
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea;
+  color: #111524;
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+}
+
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #111524;
+}
+/* select dwopdown  */
+.order-status-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.order-status-label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.order-status-select {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #111524; /* match your header/footer */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.order-status-select:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.order-status-select:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+}
+
+/* Custom colors for each status */
+.order-status-select.status-0 {
+  color: orange;
+}
+
+.order-status-select.status-1 {
+  color: #28a745; /* green */
+}
+
+.order-status-select.status-2 {
+  color: #007bff; /* blue */
 }

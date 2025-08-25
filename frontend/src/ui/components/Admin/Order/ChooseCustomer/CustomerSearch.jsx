@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FaSearch, FaHandPointUp } from "react-icons/fa";
 import { orderFetch } from "../../../../../services/order.service";
+import { Pagination } from "react-bootstrap";
+import { FaArrowRight } from "react-icons/fa";
 
 function CustomerSearch({
   query,
@@ -13,6 +15,7 @@ function CustomerSearch({
 }) {
   const [results, setResults] = useState([]);
   const wrapperRef = useRef(null);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     orderFetch(query).then((res) => setResults(res));
@@ -27,7 +30,7 @@ function CustomerSearch({
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setFocus]);
+  }, [setFocus , page]);
 
   return (
     <div ref={wrapperRef} className="container mt-5">
@@ -50,36 +53,49 @@ function CustomerSearch({
         </div>
 
         {focus && (
-          <Table striped bordered hover responsive>
-            {results.length > 0 ? (
-              <tbody>
-                {results.map((customer, index) => (
-                  <tr
-                    key={index}
-                    onMouseDown={() => onSelectCustomer(customer)}
-                  >
-                    <td>{customer.customer_first_name}</td>
-                    <td>{customer.customer_last_name}</td>
-                    <td>{customer.customer_email}</td>
-                    <td>{customer.customer_phone_number}</td>
-                    <td>
-                      <FaHandPointUp size={22} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            ) : (
-              query && (
+          <>
+            <Table striped bordered hover responsive>
+              {results.length > 0 ? (
                 <tbody>
-                  <tr>
-                    <td colSpan={8} className="text-center py-3">
-                      No Customers found
-                    </td>
-                  </tr>
+                  {results.map((customer, index) => (
+                    <tr
+                      key={index}
+                      onMouseDown={() => onSelectCustomer(customer)}
+                    >
+                      <td>{customer.customer_first_name}</td>
+                      <td>{customer.customer_last_name}</td>
+                      <td>{customer.customer_email}</td>
+                      <td>{customer.customer_phone_number}</td>
+                      <td>
+                        <FaHandPointUp size={22} />
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
-              )
-            )}
-          </Table>
+              ) : (
+                query && (
+                  <tbody>
+                    <tr>
+                      <td colSpan={8} className="text-center py-3">
+                        No Customers found
+                      </td>
+                    </tr>
+                  </tbody>
+                )
+              )}
+            </Table>
+            <div className="d-flex justify-content-end mt-3">
+              <Pagination>
+                <Pagination.Prev
+                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                />
+                <Pagination.Item active>{1}</Pagination.Item>
+                <Pagination.Next>
+                  <FaArrowRight className="ms-1" />
+                </Pagination.Next>
+              </Pagination>
+            </div>
+          </>
         )}
       </div>
 

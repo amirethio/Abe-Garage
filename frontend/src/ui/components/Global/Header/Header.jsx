@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "./../../../../assets/images/logo.png";
 import useAuth from "../../../../hook/useAuth";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function Header() {
   const context = useAuth();
+
   const logout = () => {
     context.setuserState(false);
     localStorage.removeItem("authToken");
   };
+
+useEffect(() => {
+  const topHeader = document.querySelector(".header-top");
+  const mainHeader = document.querySelector(".header-upper");
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      topHeader.classList.add("hide"); // hide small header
+      mainHeader.classList.add("shrink"); // make main header fixed / sticky
+    } else {
+      topHeader.classList.remove("hide");
+      mainHeader.classList.remove("shrink");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
   return (
-    <header className="main-header header-style-one">
+    <header className="main-header header-style-one head">
+      {/* Top Header */}
       <div className="header-top">
         <div className="auto-container">
-          <div className="inner-container">
+          <div className="inner-container d-flex justify-content-between">
             <div className="left-column">
               <div className="text">Enjoy the Beso while we fix your car</div>
               <div className="office-hour">
@@ -32,61 +53,57 @@ function Header() {
         </div>
       </div>
 
+      {/* Main Header (Sticky) */}
       <div className="header-upper">
         <div className="auto-container">
-          <div className="inner-container">
+          <div className="inner-container d-flex justify-content-between align-items-center">
+            {/* Logo */}
             <div className="logo-box">
               <div className="logo">
                 <Link to="/">
-                  <img src={logo} alt="" />
+                  <img src={logo} alt="logo" />
                 </Link>
               </div>
             </div>
-            <div className="right-column">
-              <div className="nav-outer">
-                <div className="mobile-nav-toggler">
-                  <img src="assets/images/icons/icon-bar.png" alt="" />
-                </div>
 
+            {/* Navigation */}
+            <div className="right-column d-flex align-items-center">
+              <div className="nav-outer">
                 <nav className="main-menu navbar-expand-md navbar-light">
-                  <div
-                    className="collapse navbar-collapse show clearfix"
-                    id="navbarSupportedContent"
-                  >
-                    <ul className="navigation">
-                      <li className="dropdown">
-                        <Link to="/">Home</Link>
-                      </li>
-                      <li className="dropdown">
-                        <Link to="/about">About Us</Link>
-                      </li>
-                      <li className="dropdown">
-                        <Link to="/services">Services</Link>
-                      </li>
-                      <li>
-                        <Link to="/contact">Contact Us</Link>
-                      </li>
-                    </ul>
-                  </div>
+                  <ul className="navigation d-flex list-unstyled mb-0">
+                    <li className="dropdown">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="dropdown">
+                      <Link to="/about">About Us</Link>
+                    </li>
+                    <li className="dropdown">
+                      <Link to="/services">Services</Link>
+                    </li>
+                    <li>
+                      <Link to="/contact">Contact Us</Link>
+                    </li>
+                  </ul>
                 </nav>
               </div>
-              {context?.userData?.employee_role == 3 ? (
-                <div className="search-btn ">
+
+              {/* Admin Panel Link */}
+              {context?.userData?.employee_role === 3 && (
+                <div className="search-btn ml-3">
                   <Link to="/admin" className="admin-panel">
                     Dashboard
                   </Link>
                 </div>
-              ) : (
-                <div className="search-btn "></div>
               )}
 
-              <div className="link-btn">
+              {/* Login / Logout */}
+              <div className="link-btn ml-3">
                 {context?.userData ? (
-                  <Link className="theme-btn  btn-style-zero" onClick={logout}>
+                  <Link className="theme-btn btn-style-zero" onClick={logout}>
                     Logout
                   </Link>
                 ) : (
-                  <Link className="theme-btn btn-style-zero" to={"/login"}>
+                  <Link className="theme-btn btn-style-zero" to="/login">
                     Login
                   </Link>
                 )}
@@ -94,61 +111,6 @@ function Header() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="sticky-header">
-        <div className="header-upper">
-          <div className="auto-container">
-            <div className="inner-container">
-              <div className="logo-box">
-                <div className="logo">
-                  <Link to="/">
-                    <img src={logo} alt="" />
-                  </Link>
-                </div>
-              </div>
-              <div className="right-column">
-                <div className="nav-outer">
-                  <div className="mobile-nav-toggler">
-                    <img src="assets/images/icons/icon-bar.png" alt="" />
-                  </div>
-
-                  <nav className="main-menu navbar-expand-md navbar-light"></nav>
-                </div>
-                <div className="search-btn"></div>
-                <div className="link-btn">
-                  <Link
-                    to="/login"
-                    className="theme-btn btn-style-one btn-style-zero"
-                  >
-                    Login
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mobile-menu">
-        <div className="menu-backdrop"></div>
-        <div className="close-btn">
-          <span className="icon flaticon-remove"></span>
-        </div>
-
-        <nav className="menu-box">
-          <div className="nav-logo">
-            <Link to="index.html">
-              <img src={logo} alt="" title="" />
-            </Link>
-          </div>
-          <div className="menu-outer"></div>
-        </nav>
-      </div>
-
-      <div className="nav-overlay">
-        <div className="cursor"></div>
-        <div className="cursor-follower"></div>
       </div>
     </header>
   );

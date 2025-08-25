@@ -18,6 +18,9 @@ import EditCustomer from "./ui/pages/admin/Customer/EditCustomer";
 import NewOrder from "./ui/pages/admin/Order/NewOrder";
 import Service from "./ui/pages/admin/Service/Service";
 import AdminMenu from "./ui/components/Admin/AdminMenu";
+import Orders from "./ui/pages/admin/Order/Orders";
+import Profile from "./ui/pages/admin/Customer/Profile";
+
 
 
 function App() {
@@ -32,6 +35,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
+        <Route path="/test" element={<NotAuthorized />} />
         <Route
           path="/admin"
           element={
@@ -88,12 +92,20 @@ function App() {
             </PrivateAuth>
           }
         />
+        <Route
+          path="/admin/profile/:hash"
+          element={
+            <PrivateAuth role={[3]}>
+              <Profile/>
+            </PrivateAuth>
+          }
+        />
         {/* order */}
         <Route
           path="/admin/new-order"
           element={
             <PrivateAuth role={[3]}>
-              <NewOrder />
+              <NewOrder/>
             </PrivateAuth>
           }
         />
@@ -102,6 +114,14 @@ function App() {
           element={
             <PrivateAuth role={[3]}>
               <Service />
+            </PrivateAuth>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <PrivateAuth role={[3]}>
+              <Orders />
             </PrivateAuth>
           }
         />

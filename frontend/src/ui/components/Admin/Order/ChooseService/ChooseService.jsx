@@ -7,6 +7,7 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
   const [customService, setCustomService] = useState({
     price: "",
     service_description: "",
+    estimated_time: "",
   });
   const [errors, setErrors] = useState({
     price: "",
@@ -51,13 +52,10 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
     };
     let hasError = false;
 
-    // ✅ Price validation
     if (customService.price.trim() === "") {
       newErrors.price = "Price is required.";
       hasError = true;
     }
-
-    // ✅ At least one service OR description
     if (
       selectedService.services.length === 0 &&
       customService.service_description.trim() === ""
@@ -66,6 +64,11 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
         "Select at least one service OR fill description.";
       hasError = true;
     }
+    if (customService.estimated_time.trim() === "") {
+      newErrors.estimated_time = "Estimated completion date is required.";
+      hasError = true;
+    }
+
 
     setErrors(newErrors);
 
@@ -75,6 +78,7 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
       ...selectedService,
       price: customService.price,
       additional_request: customService.service_description,
+      estimated_time: customService.estimated_time,
     };
     setSelectedService(updatedService);
     if (updatedService.price !== "" && updatedService.services.length > 0) {
@@ -159,6 +163,24 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
                 />
                 {errors.price && (
                   <div className="text-danger small">{errors.price}</div>
+                )}
+              </div>
+              <div className="mb-3 d-flex align-items-center gap-2">
+                <p className="pr-2">Estimated time</p>
+                <input
+                  type="date"
+                  className={`form-controlu mb-2  ${
+                    errors.estimated_time ? "is-invalid" : ""
+                  }`}
+                  style={{ width: "auto" }}
+                  value={customService.estimated_time}
+                  name="estimated_time"
+                  onChange={handleAddCustomService}
+                />
+                {errors.estimated_time && (
+                  <div className="text-danger small">
+                    {errors.estimated_time}
+                  </div>
                 )}
               </div>
 

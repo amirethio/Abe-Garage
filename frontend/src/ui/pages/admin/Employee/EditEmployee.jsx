@@ -1,6 +1,6 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu";
-import EditEmployeeForm from "../../../components/Admin/Employee/EmployeeForm";
+import EditEmployeeForm from "../../../components/Admin/Employee/EditEmployeeForm";
 
 function EditEmployee() {
   return (
