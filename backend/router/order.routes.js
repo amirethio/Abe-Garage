@@ -11,13 +11,30 @@ router.post(
   orderController.addOrder
 );
 
+router.get(
+  "/api/orders",
+  authMiddleware,
+  authorizeRoles(1, 2, 3),
+  orderController.fetchOredrs
+);
 
+router.get(
+  "/api/order/:id",
+  authMiddleware,
+  authorizeRoles(1, 2, 3),
+  orderController.getOrder
+);
 
-// router.get(
-//   "/api/services",
-//   authMiddleware,
-//   authorizeRoles(1, 2, 3),
-//   serviceController.fetchServices
-// );
-
+router.put(
+  "/api/order",
+  authMiddleware,
+  authorizeRoles(1, 2, 3),
+  orderController.updateOrder
+);
+router.delete(
+  "/api/order/:id",
+  authMiddleware,
+  authorizeRoles(1, 2, 3),
+  orderController.deleteOrder
+);
 module.exports = router;

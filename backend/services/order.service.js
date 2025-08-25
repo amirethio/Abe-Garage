@@ -1,6 +1,6 @@
 const db = require("./../config/db.config");
 const { v4: uuidv4 } = require("uuid");
-
+const pool = db.pool;
 async function addOrder(order_data) {
   try {
     const order_hash = uuidv4();
@@ -71,19 +71,52 @@ async function addOrder(order_data) {
   }
 }
 
-async function fetchCustomer() {
+async function fetchOredrs() {
   try {
     const sql = `SELECT
+    orders.order_id,
+    orders.order_date,
+    orders.order_hash,
+    customer_info.customer_first_name,
     customer_identifier.customer_email,
     customer_identifier.customer_phone_number,
-    customer_identifier.customer_added_date,
-    customer_identifier.customer_hash,
+    customer_vehicle_info.vehicle_make,
+    customer_vehicle_info.vehicle_model,
+    customer_vehicle_info.vehicle_tag,
+    customer_vehicle_info.vehicle_year,
+    customer_vehicle_info.vehicle_serial,
+    employee_info.employee_first_name,
+    order_status.order_status,
+    order_info.estimated_completion_date,
+    order_info.order_total_price,
+    order_info.additional_request,
+  GROUP_CONCAT(common_services.service_name SEPARATOR ', ')  AS service_name
+    FROM orders 
+    INNER JOIN customer_info ON  orders.customer_id = customer_info.customer_id
+    INNER JOIN customer_identifier ON  orders.customer_id = customer_identifier.customer_id
+    INNER JOIN customer_vehicle_info ON  orders.vehicle_id = customer_vehicle_info.vehicle_id
+    INNER JOIN employee_info ON  orders.employee_id = employee_info.employee_id
+    INNER JOIN order_status ON  orders.order_id = order_status.order_id
+    INNER JOIN order_info ON  orders.order_id = order_info.order_id
+    INNER JOIN order_services ON  orders.order_id = order_services.order_id
+    INNER JOIN common_services ON  order_services.service_id = common_services.service_id
+    GROUP BY 
+    orders.order_id,
+    orders.order_date,
+    orders.order_hash,
     customer_info.customer_first_name,
-    customer_info.customer_last_name,
-    customer_info.active_customer_status
-FROM customer_identifier
-LEFT JOIN customer_info
-    ON customer_identifier.customer_id = customer_info.customer_id;
+    customer_identifier.customer_email,
+    customer_identifier.customer_phone_number,
+    customer_vehicle_info.vehicle_make,
+    customer_vehicle_info.vehicle_model,
+    customer_vehicle_info.vehicle_tag,
+    customer_vehicle_info.vehicle_year,
+    customer_vehicle_info.vehicle_serial,
+    employee_info.employee_first_name,
+    order_status.order_status,
+    order_info.estimated_completion_date,
+    order_info.order_total_price,
+    order_info.additional_request;
   `;
     const response = await db.query(sql);
     return response;
@@ -95,62 +128,94 @@ LEFT JOIN customer_info
   }
 }
 
-async function getSingleCustomer(customerHash) {
-  const sql = `SELECT
-    customer_identifier.customer_email,
-    customer_identifier.customer_id,
-    customer_identifier.customer_phone_number,
-    customer_identifier.customer_added_date,
-    customer_identifier.customer_hash,
+async function getOrder(customer_id) {
+  try {
+    const sql = `SELECT
+    orders.order_id,
+    orders.order_date,
     customer_info.customer_first_name,
-    customer_info.customer_last_name,
-    customer_info.active_customer_status
-FROM customer_identifier
-LEFT JOIN customer_info
-    ON customer_identifier.customer_id = customer_info.customer_id where customer_hash = ? ;
+    customer_identifier.customer_email,
+    customer_identifier.customer_phone_number,
+    customer_vehicle_info.vehicle_make,
+    customer_vehicle_info.vehicle_model,
+    customer_vehicle_info.vehicle_year,
+    customer_vehicle_info.vehicle_serial,
+    employee_info.employee_first_name,
+    order_status.order_status
+    FROM orders 
+    INNER JOIN customer_info ON  orders.customer_id = customer_info.customer_id
+    INNER JOIN customer_identifier ON  orders.customer_id = customer_identifier.customer_id
+    INNER JOIN customer_vehicle_info ON  orders.vehicle_id = customer_vehicle_info.vehicle_id
+    INNER JOIN employee_info ON  orders.employee_id = employee_info.employee_id
+    INNER JOIN order_status ON  orders.order_id = order_status.order_id where orders.customer_id = ?
   `;
-  const rows = await db.query(sql, [customerHash]);
-  return rows;
+    const response = await db.query(sql, [customer_id]);
+    return response;
+  } catch (error) {
+    return;
+  }
 }
 
-async function updateCustomer(new_data) {
+async function updateOrder(order_data) {
   try {
-    const {
-      customer_first_name,
-      customer_last_name,
-      customer_phone_number,
-      active_customer_status,
-      customer_id,
-      customer_hash,
-    } = new_data;
-    const sql = ` update customer_info set customer_first_name = ? , customer_last_name = ? ,active_customer_status = ? where  customer_id = ?`;
-    const response = await db.query(sql, [
-      customer_first_name,
-      customer_last_name,
-      active_customer_status,
-      customer_id,
-    ]);
-    // console.log(response , "response 1");
+    const { order_status, order_id } = order_data;
+    const sql1 = `UPDATE order_status SET order_status = ? WHERE order_id = ?`;
 
-    const sql1 = ` update customer_identifier set customer_phone_number = ?  where  customer_hash = ?`;
-    const response1 = await db.query(sql1, [
-      customer_phone_number,
-      customer_hash,
-    ]);
+    const result = await db.query(sql1, [order_status, order_id]);
 
     return {
-      sucess: true,
-      message: "sucessfully update the employee",
+      success: true,
+      message: "Order updated successfully",
     };
   } catch (error) {
-    console.log(error);
+
     return {
-      sucess: false,
-      message: "something went wrong",
+      success: false,
+      message: "Problem happened while updating an order",
+      error: error.message,
     };
+  }
+}
+
+async function deleteOrder(order_id) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    // 1. Delete related order services
+    await connection.query(`DELETE FROM order_services WHERE order_id = ?`, [
+      order_id,
+    ]);
+
+    // 2. Delete order info
+    await connection.query(`DELETE FROM order_info WHERE order_id = ?`, [
+      order_id,
+    ]);
+
+    // 3. Delete order status
+    await connection.query(`DELETE FROM order_status WHERE order_id = ?`, [
+      order_id,
+    ]);
+
+    // 4. Delete the order itself
+    await connection.query(`DELETE FROM orders WHERE order_id = ?`, [order_id]);
+
+    await connection.commit();
+    console.log("Order and related data deleted successfully");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    await connection.rollback();
+    return { success: false, error };
+  } finally {
+    connection.release();
   }
 }
 
 module.exports = {
   addOrder,
+  fetchOredrs,
+  getOrder,
+  updateOrder,
+  deleteOrder,
 };
