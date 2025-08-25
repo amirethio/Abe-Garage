@@ -23,7 +23,25 @@ async function getVehicles(req, res, next) {
     });
   }
 }
+
+async function deleteVehicle(req, res, next) {
+  try {
+    const id = req.params.id;
+    const response = await VehicleService.deleteVehicle(id);
+    if (!response) {
+      res.status(400).json({
+        error: "Failed to delete employee!",
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+      });
+    }
+  } catch (error) {}
+}
+
 module.exports = {
   addVehicle,
   getVehicles,
+  deleteVehicle,
 };

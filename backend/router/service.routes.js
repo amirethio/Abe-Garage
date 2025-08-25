@@ -17,4 +17,12 @@ router.get(
   serviceController.fetchServices
 );
 
+router.delete(
+  "/api/service/:id",
+  authMiddleware,
+  authorizeRoles(1, 2, 3),
+  serviceController.deleteService
+);
+
+
 module.exports = router;

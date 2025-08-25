@@ -12,7 +12,6 @@ async function addServices(req, res, next) {
   }
 }
 
-
 async function fetchServices(req, res, next) {
   try {
     const response = await serviceServices.fetchServices();
@@ -24,7 +23,23 @@ async function fetchServices(req, res, next) {
     });
   }
 }
+
+async function deleteService(req, res, next) {
+try {
+    const id = req.params.id;
+   const response = await serviceServices.deleteService(id);
+   res.status(200).json(response);
+} catch (error) {
+  res.status(501).json({
+    sucess: false,
+    message: "something went wrong",
+  });
+}
+
+}
+
 module.exports = {
   addServices,
   fetchServices,
+  deleteService,
 };

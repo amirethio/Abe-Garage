@@ -18,4 +18,11 @@ router.get(
   authorizeRoles(1, 3, 2),
   VehicleController.getVehicles
 );
+router.delete(
+  "/api/vehicle/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  VehicleController.deleteVehicle
+);
+
 module.exports = router;
