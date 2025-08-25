@@ -14,6 +14,7 @@ try {
 }    
 }
 
+
 async function listCustomer(req, res, next) {
 try {
    const response = await customerService.fetchCustomer();
@@ -25,6 +26,7 @@ try {
   });
 }
 }
+
 
 async function getSingleCustomer(req, res, next) {
   const id = req.params.id;
@@ -40,12 +42,13 @@ async function getSingleCustomer(req, res, next) {
     });
   }
 }
+
+
 async function updateCustomer(req, res, next) {
   try {
     const response = await customerService.updateCustomer(req.body);
     res.status(200).json(response);
   } catch (error) {
-    console.log(error);
     res.status(501).json({
       sucess: false,
       message: "something went wrong",
@@ -62,12 +65,23 @@ async function searchCustomers(req,res,next) {
   } catch (error) {
     
   }
-
-
-
-
 }
 
+async function deleteCustomer(req, res, next) {
+  try {
+    const id = req.params.id;
+    const response = await customerService.deleteCustomer(id);
+    if (!response) {
+      res.status(400).json({
+        error: "Failed to delete employee!",
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+      });
+    }
+  } catch (error) {}
+}
 
 
 
@@ -78,4 +92,5 @@ module.exports = {
   getSingleCustomer,
   updateCustomer,
   searchCustomers,
+  deleteCustomer,
 };

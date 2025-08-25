@@ -28,7 +28,6 @@ async function createEmployee(req, res, next) {
         });
       }
     } catch (error) {
-      console.log(error);
       res.status(400).json({
         success: "false",
         error: "someting went wrong",
@@ -80,10 +79,28 @@ async function getSingleEmployee(req, res, next) {
   }
 }
 
+async function deleteEmployee(req, res, next) {
+  try {
+    const id = req.params.id;
+    const employees = await EmployeeService.deleteEmployee(id);
+    if (!employees) {
+      res.status(400).json({
+        error: "Failed to delete employee!",
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+      });
+    }
+  } catch (error) {
+    
+  }
+}
 
 module.exports = {
   createEmployee,
   getAllEmployees,
   updateEmployee,
   getSingleEmployee,
+  deleteEmployee,
 };

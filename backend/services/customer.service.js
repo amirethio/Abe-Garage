@@ -1,6 +1,6 @@
 const db = require("./../config/db.config");
 const { v4: uuidv4 } = require("uuid");
-
+const pool =  db.pool
 async function AddCustomer(customer_data) {
   try {
     const publicId = uuidv4();
@@ -105,7 +105,6 @@ async function updateCustomer(new_data) {
       active_customer_status,
       customer_id,
     ]);
-// console.log(response , "response 1");
 
     const sql1 = ` update customer_identifier set customer_phone_number = ?  where  customer_hash = ?`;
     const response1 = await db.query(sql1, [
@@ -120,7 +119,6 @@ async function updateCustomer(new_data) {
       message: "sucessfully update the employee",
     };
   } catch (error) {
-    console.log(error);
     return {
       sucess: false,
       message: "something went wrong",
@@ -150,7 +148,6 @@ async function searchCustomers(query) {
     const response = await db.query(sql, [`%${query}%`, `%${query}%`]);
     return response;
   } catch (error) {
-    console.log(error);
     
     return {
       sucess: false,
@@ -158,6 +155,63 @@ async function searchCustomers(query) {
     };
   }
 }
+
+async function deleteCustomer(customer_id) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    await connection.query(
+      `DELETE os FROM order_services os
+       INNER JOIN orders o ON os.order_id = o.order_id
+       WHERE o.customer_id = ?`,
+      [customer_id]
+    );
+
+    await connection.query(
+      `DELETE oi FROM order_info oi
+       INNER JOIN orders o ON oi.order_id = o.order_id
+       WHERE o.customer_id = ?`,
+      [customer_id]
+    );
+
+    await connection.query(
+      `DELETE osst FROM order_status osst
+       INNER JOIN orders o ON osst.order_id = o.order_id
+       WHERE o.customer_id = ?`,
+      [customer_id]
+    );
+
+    await connection.query(`DELETE FROM orders WHERE customer_id = ?`, [
+      customer_id,
+    ]);
+
+    await connection.query(
+      `DELETE FROM customer_vehicle_info WHERE customer_id = ?`,
+      [customer_id]
+    );
+
+    await connection.query(`DELETE FROM customer_info WHERE customer_id = ?`, [
+      customer_id,
+    ]);
+
+    await connection.query(
+      `DELETE FROM customer_identifier WHERE customer_id = ?`,
+      [customer_id]
+    );
+
+    await connection.commit();
+    return { success: true };
+  } catch (error) {
+    await connection.rollback();
+    return { success: false, error };
+  } finally {
+    connection.release();
+  }
+}
+
+
+
 
 
 
@@ -167,4 +221,5 @@ module.exports = {
   getSingleCustomer,
   updateCustomer,
   searchCustomers,
+  deleteCustomer,
 };

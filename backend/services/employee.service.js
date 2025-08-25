@@ -1,6 +1,6 @@
 const db = require("./../config/db.config");
 const bcrypt = require("bcryptjs");
-
+const pool = db.pool;
 async function checkIfEmployeeExists(email_adress) {
   const sql = `SELECT 1 FROM employee WHERE employee_email	 = ?;`;
   const emailCheck = await db.query(sql, [email_adress]);
@@ -43,7 +43,6 @@ async function createEmployee(user_data) {
     };
     return createEmployee;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }
@@ -103,11 +102,67 @@ async function updateEmployee(new_data) {
 async function getSingleEmployee(employee_id) {
   const query =
     "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id where employee.employee_id = ?";
-  const rows = await db.query(query , [employee_id]);
+  const rows = await db.query(query, [employee_id]);
   return rows;
 }
 
 
+
+async function deleteEmployee(employee_id) {
+ const connection = await pool.getConnection();
+ try {
+   await connection.beginTransaction();
+
+   // Delete child records first
+   await connection.query(
+     `DELETE os FROM order_services os 
+       INNER JOIN orders o ON os.order_id = o.order_id 
+       WHERE o.employee_id = ?`,
+     [employee_id]
+   );
+
+   await connection.query(
+     `DELETE oi FROM order_info oi
+       INNER JOIN orders o ON oi.order_id = o.order_id
+       WHERE o.employee_id = ?`,
+     [employee_id]
+   );
+
+   await connection.query(
+     `DELETE osst FROM order_status osst
+       INNER JOIN orders o ON osst.order_id = o.order_id
+       WHERE o.employee_id = ?`,
+     [employee_id]
+   );
+
+   // Delete orders themselves
+   await connection.query(`DELETE FROM orders WHERE employee_id = ?`, [
+     employee_id,
+   ]);
+
+   // Delete employee related tables
+   await connection.query(`DELETE FROM employee_info WHERE employee_id = ?`, [
+     employee_id,
+   ]);
+   await connection.query(`DELETE FROM employee_pass WHERE employee_id = ?`, [
+     employee_id,
+   ]);
+   await connection.query(`DELETE FROM employee_role WHERE employee_id = ?`, [
+     employee_id,
+   ]);
+
+   // Finally delete employee
+   await connection.query(`DELETE FROM employee WHERE employee_id = ?`, [
+     employee_id,
+   ]);
+
+   await connection.commit();
+   return { success: true };
+ } catch (error) {
+
+   return;
+ }
+}
 
 module.exports = {
   checkIfEmployeeExists,
@@ -116,4 +171,5 @@ module.exports = {
   getAllEmployees,
   updateEmployee,
   getSingleEmployee,
+  deleteEmployee,
 };

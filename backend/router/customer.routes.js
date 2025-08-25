@@ -37,4 +37,11 @@ router.get(
   customer.searchCustomers
 );
 
+router.delete(
+  "/api/customer/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  customer.deleteCustomer
+);
+
 module.exports = router;

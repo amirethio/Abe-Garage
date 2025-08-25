@@ -33,6 +33,11 @@ router.get(
   employeeController.getSingleEmployee
 );
 
-
+router.delete(
+  "/api/employee/:id",
+  authMiddleware,
+  authorizeRoles(1, 3, 2),
+  employeeController.deleteEmployee
+);
 
 module.exports = router ; 
