@@ -1,6 +1,7 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu";
 import CustomerList from "../../../components/Admin/Customer/CustomerList";
+import Customers from "../../../components/Admin/Customer/Customers";
 
 function Customer() {
   return (
@@ -9,7 +10,8 @@ function Customer() {
         <AdminMenu />
       </div>
       <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0">
-        <CustomerList/>
+        {/* <CustomerList/> */}
+        <Customers/>
       </div>
     </div>
   );

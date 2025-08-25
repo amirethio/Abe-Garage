@@ -56,6 +56,14 @@ function CustomerList() {
                       <Button variant="danger" size="sm">
                         Delete
                       </Button>
+                      <Button variant="success" size="sm" className="me-2">
+                        <Link
+                          to={`/admin/Profile/${customer.customer_hash}`}
+                          className="text-white text-decoration-none"
+                        >
+                          Profile
+                        </Link>
+                      </Button>
                     </div>
                   </td>
                 </tr>
