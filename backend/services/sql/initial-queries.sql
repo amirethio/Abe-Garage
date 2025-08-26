@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `customer_info` (
 ) ENGINE = InnoDB;
 
 
+
 CREATE TABLE IF NOT EXISTS `customer_vehicle_info` (
   `vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -28,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `customer_vehicle_info` (
   `vehicle_type` varchar(255) NOT NULL,
   `vehicle_mileage` int(11) NOT NULL,
   `vehicle_tag` varchar(255) NOT NULL,
-  `vehicle_serial` varchar(255) NOT NULL,
+  `vehicle_serial` varchar(255) NOT NULL UNIQUE,
   `vehicle_color` varchar(255) NOT NULL,
   PRIMARY KEY (vehicle_id),
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id)
@@ -81,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `employee_role` (
 ) ENGINE = InnoDB;
 -- Order tables  
 CREATE TABLE IF NOT EXISTS `orders` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `employee_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `vehicle_id` int(11) NOT NULL,
@@ -135,4 +136,4 @@ VALUES ('Employee'),
 -- INSERT INTO employee_pass (employee_id, employee_password_hashed)
 -- VALUES (1, '$2b$10$B6yvl4hECXploM.fCDbXz.brkhmgqNlawh9ZwbfkFX.F3xrs.15Xi');  
 -- INSERT INTO employee_role (employee_id, company_role_id)
--- VALUES (1, 3); 
+-- VALUES (1, 3);

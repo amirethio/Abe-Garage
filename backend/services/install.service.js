@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 
 async function install() {
-  console.log()
   const sqlPath = path.join(__dirname, "sql", "initial-queries.sql");
   const lines = fs.readFileSync(sqlPath, "utf-8").split("\n");
   let queries = [];

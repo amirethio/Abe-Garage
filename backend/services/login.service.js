@@ -33,7 +33,7 @@ async function login(user_data) {
       return returnService;
     }
   } catch (error) {
-    console.log(error);
+    return
   }
 }
 

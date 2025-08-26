@@ -13,13 +13,13 @@ router.post(
 router.get(
   "/api/customers",
   authMiddleware,
-  authorizeRoles(1,3, 2),
+  authorizeRoles(1, 3, 2),
   customer.listCustomer
 );
 router.get(
   "/api/customer/:id",
   authMiddleware,
-  authorizeRoles(1, 3, 2),
+  authorizeRoles(3),
   customer.getSingleCustomer
 );
 
@@ -40,7 +40,7 @@ router.get(
 router.delete(
   "/api/customer/:id",
   authMiddleware,
-  authorizeRoles(1, 3, 2),
+  authorizeRoles(3, 2),
   customer.deleteCustomer
 );
 

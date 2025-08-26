@@ -8,7 +8,6 @@ const auth = (req, res, next) => {
 
   const decode = jwt.verify(token, SECRET_KEY, (err, decoded) => {
     if (err) {
-      console.log('we got error' , err);
       
       return res
         .status(403)

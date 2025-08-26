@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const VehicleController = require("./../controller/vehicle.controller");
-const authMiddleware =  require('./../middlewares/auth.middleware')
-const authorizeRoles  = require('./../middlewares/role.middleware')
-
+const authMiddleware = require("./../middlewares/auth.middleware");
+const authorizeRoles = require("./../middlewares/role.middleware");
 
 router.post(
   "/api/vehicle",
@@ -21,7 +20,7 @@ router.get(
 router.delete(
   "/api/vehicle/:id",
   authMiddleware,
-  authorizeRoles(1, 3, 2),
+  authorizeRoles(3, 2),
   VehicleController.deleteVehicle
 );
 

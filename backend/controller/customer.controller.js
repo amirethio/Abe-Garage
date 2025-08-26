@@ -36,6 +36,7 @@ async function getSingleCustomer(req, res, next) {
       error: "Failed to get all employees!",
     });
   } else {
+
     res.status(200).json({
       status: "success",
       data: response,
@@ -61,7 +62,9 @@ async function searchCustomers(req,res,next) {
 
   try {
     const response = await customerService.searchCustomers(req.query.query);
-    res.send(response)
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // delay
+
+    res.send(response);
   } catch (error) {
     
   }

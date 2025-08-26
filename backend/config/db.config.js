@@ -6,6 +6,7 @@ const connectionParams = {
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   connectionLimit: 10,
+  multipleStatements: true,
 };
 
 const pool = mysql.createPool(connectionParams);
@@ -16,4 +17,5 @@ async function query(sql, params) {
 }
 
 
-module.exports = { query };
+module.exports = { query , pool  };
+ 

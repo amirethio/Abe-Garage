@@ -7,7 +7,7 @@ const serviceController = require("./../controller/service.controller");
 router.post(
   "/api/service",
   authMiddleware,
-  authorizeRoles(1, 2, 3),
+  authorizeRoles(2, 3),
   serviceController.addServices
 );
 router.get(
@@ -20,7 +20,7 @@ router.get(
 router.delete(
   "/api/service/:id",
   authMiddleware,
-  authorizeRoles(1, 2, 3),
+  authorizeRoles(3),
   serviceController.deleteService
 );
 

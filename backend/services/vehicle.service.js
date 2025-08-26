@@ -95,7 +95,13 @@ async function deleteVehicle(vehicle_id) {
     await connection.commit();
     return { success: true };
   } catch (error) {
-    await connection.rollback();
+    await connection.rollback();async function deleteVehicle(vehicle_id) {
+      try {
+        const sql = `SELECT * FROM customer_vehicle_info WHERE vehicle_id = ?`;
+        const response = await db.query(sql, [vehicle_id]);
+        console.log(response);
+      } catch (error) {}
+    }
     return { success: false, error };
   } finally {
     connection.release();

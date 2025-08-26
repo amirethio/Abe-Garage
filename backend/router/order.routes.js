@@ -7,7 +7,7 @@ const orderController = require("./../controller/order.controller");
 router.post(
   "/api/order",
   authMiddleware,
-  authorizeRoles(1, 2, 3),
+  authorizeRoles( 1,2, 3),
   orderController.addOrder
 );
 
@@ -21,7 +21,7 @@ router.get(
 router.get(
   "/api/order/:id",
   authMiddleware,
-  authorizeRoles(1, 2, 3),
+  authorizeRoles(2, 3),
   orderController.getOrder
 );
 
@@ -34,7 +34,7 @@ router.put(
 router.delete(
   "/api/order/:id",
   authMiddleware,
-  authorizeRoles(1, 2, 3),
+  authorizeRoles(3),
   orderController.deleteOrder
 );
 module.exports = router;
