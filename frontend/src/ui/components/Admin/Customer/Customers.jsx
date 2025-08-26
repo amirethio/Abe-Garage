@@ -6,28 +6,38 @@ import { Link, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Pagination } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
+import { deleteCustomer } from "./../../../../services/customer.service";
+import {LargeLoader} from "../../Loader";
+
+
 
 function Customers() {
   const [query, setQuery] = useState("");
   const [result, setResults] = useState([]);
   const [Focus, setFocus] = useState(false);
   const [page, setPage] = useState(1);
+  const [deletestatus, setDeleteStatus] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const handleChange = (event) => {
     setQuery(event.target.value);
   };
 
-  const handleRowClick = (index) => {
-    setUser(result[index]);
-    setIsSelected(true);
+  const handleDelete = (id) => {
+    deleteCustomer(id).then(() => {
+      setDeleteStatus((pre) => !pre);
+    });
   };
   useEffect(() => {
     orderFetch(query).then((res) => {
       setResults(res);
+      setLoading(false);
     });
-  }, [query, page]);
-
+  }, [query, page, deletestatus]);
+  if (loading) {
+    return <LargeLoader />;
+  }
   return (
     <>
       <section className="contact-section custom-bg pl-5 responsive-form">
@@ -57,7 +67,7 @@ function Customers() {
             </div>
             {/* Results */}
             <Table striped bordered hover responsive>
-              {result.length ? (
+              {result?.length ? (
                 <>
                   <thead>
                     <tr>
@@ -100,7 +110,13 @@ function Customers() {
                                   Edit
                                 </Link>
                               </Button>
-                              <Button variant="danger" size="sm">
+                              <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() =>
+                                  handleDelete(customer.customer_id)
+                                }
+                              >
                                 Delete
                               </Button>
                               <Button

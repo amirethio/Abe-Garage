@@ -1,17 +1,17 @@
-
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FaSearch, FaHandPointUp } from "react-icons/fa";
-import { fetchVechile } from "../../../../services/vehicle.service";
+import {
+  deleteVehicle,
+} from "../../../../services/vehicle.service";
 import { Link } from "react-router-dom";
-function CustomerVhicle({
-  id,
-}) {
-  const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    fetchVechile(id).then((res) => setResults(res));
-  }, [id]);
+function CustomerVhicle({ results, setDeleteStatus }) {
+  const handleDelete = (id) => {
+    deleteVehicle(id).then(() => {
+      setDeleteStatus((pre) => !pre);
+    });
+  };
 
   return (
     <>
@@ -54,7 +54,13 @@ function CustomerVhicle({
                             >
                               <Link>Edit</Link>
                             </Button>
-                            <Button variant="danger" size="sm">
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => {
+                                handleDelete(vehicle.vehicle_id);
+                              }}
+                            >
                               <Link to={``}>Delete</Link>
                             </Button>
                           </div>{" "}

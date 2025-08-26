@@ -1,17 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { format } from "date-fns";
-import { listEmployee } from "../../../../services/employee.service";
+import {
+  listEmployee,
+  deleteEmployee,
+} from "../../../../services/employee.service";
 import { Link } from "react-router-dom";
+import {LargeLoader} from "../../Loader";
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
+  const [deletestatus , setDeleteStatus] =  useState(false)
+  const [loading, setLoading] = useState(true); 
 
+  const handleDelete = (id) => {
+    deleteEmployee(id).then(()=>{
+      setDeleteStatus((pre) => !pre);
+    })
+    
+  };
   useEffect(() => {
-    listEmployee().then((data) => setEmployees(data));
-  }, []);
-
+    listEmployee().then((data) => {
+      setEmployees(data);
+      setLoading(false)
+    });
+  }, [deletestatus]);
+if(loading){
+  return <LargeLoader />;
+}
   return (
     <div className="admin-right-side p-4">
+      {console.log(deletestatus)}
       <section className="contact-section">
         <div className="contact-title mb-4">
           <h2>Employees</h2>
@@ -30,7 +48,7 @@ function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            {employees.length ? (
+            {employees.length > 0 ? (
               employees.map((employee) => (
                 <tr key={employee.employee_id}>
                   <td>{employee.active_employee ? "Yes" : "No"}</td>
@@ -54,7 +72,13 @@ function EmployeeList() {
                           Edit
                         </Link>
                       </Button>
-                      <Button variant="danger" size="sm">
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => {
+                          handleDelete(employee.employee_id);
+                        }}
+                      >
                         <Link to={``}>Delete</Link>
                       </Button>
                     </div>

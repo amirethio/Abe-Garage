@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function SelectedVhicleComponent({ SelectedVhicle, setSelectedVhicle }) {
+  
   return (
     <>
       <div className="container mt-5">

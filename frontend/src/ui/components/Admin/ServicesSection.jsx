@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Button, Form } from "react-bootstrap";
-import { addServices , fetchService} from "./../../../services/service.service";
+import {
+  addServices,
+  fetchService,
+  deleteService,
+} from "./../../../services/service.service";
+import Loader, { LargeLoader } from "../Loader";
 const ServicesSection = () => {
   const InitalialState = {
     service_name: "",
@@ -10,7 +15,10 @@ const ServicesSection = () => {
   const [formData, setformData] = useState(InitalialState);
   const [sucess, setsucess] = useState("");
   const [error, setErrors] = useState("");
-  const [data , setData] =  useState([])
+  const [data, setData] = useState([]);
+  const [IsDelete, setIsDelete] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   function handleChnage(event) {
     setformData((pre) => ({
       ...pre,
@@ -31,11 +39,22 @@ const ServicesSection = () => {
     }
   }
 
-  useEffect(()=>{
- fetchService().then((res)=>{ 
-  setData(res)
-  })
-  },[sucess , error])
+  const handleDelete = (id) => {
+    deleteService(id).then(() => {
+      setIsDelete((pre) => !pre);
+    });
+  };
+
+  useEffect(() => {
+    fetchService().then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [sucess, error , IsDelete]);
+
+  if (loading) {
+    return <LargeLoader />;
+  }
   return (
     <section className="contact-section custom-bg pl-5 responsive-form">
       <div className="auto-container contact-title ml-6 pl-5">
@@ -61,7 +80,10 @@ const ServicesSection = () => {
                 <button className="btn btn-outline-primary btn-sm rounded-circle me-2">
                   <FaEdit />
                 </button>
-                <button className="btn btn-outline-danger btn-sm rounded-circle">
+                <button
+                  className="btn btn-outline-danger btn-sm rounded-circle"
+                  onClick={() => handleDelete(service.service_id)}
+                >
                   <FaTrash />
                 </button>
               </div>
@@ -70,7 +92,6 @@ const ServicesSection = () => {
         ) : (
           <h2>no data found</h2>
         )}
-
 
         <div className="bg-white border rounded p-4 shadow-sm mt-4">
           <h2 className="mb-3">Add a New Service</h2>

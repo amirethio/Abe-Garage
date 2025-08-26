@@ -4,6 +4,7 @@ import { FaSearch, FaHandPointUp } from "react-icons/fa";
 import { orderFetch } from "../../../../../services/order.service";
 import { Pagination } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
+import { MiniLoader } from "../../../Loader";
 
 function CustomerSearch({
   query,
@@ -16,9 +17,13 @@ function CustomerSearch({
   const [results, setResults] = useState([]);
   const wrapperRef = useRef(null);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    orderFetch(query).then((res) => setResults(res));
+    orderFetch(query).then((res) => {
+      setResults(res);
+      setLoading(false);
+    });
   }, [query]);
 
   // Click outside detection
@@ -30,7 +35,7 @@ function CustomerSearch({
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setFocus , page]);
+  }, [setFocus, page]);
 
   return (
     <div ref={wrapperRef} className="container mt-5">
@@ -40,7 +45,10 @@ function CustomerSearch({
             className="form-control-lg ps-5 custom-bg"
             placeholder="Search for customers with first name or last name ..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setLoading(true);
+            }}
             onFocus={() => setFocus(true)}
             style={{ borderRadius: "8px", width: "100%" }}
           />
@@ -51,62 +59,70 @@ function CustomerSearch({
             <FaSearch />
           </div>
         </div>
-
-        {focus && (
+        {loading && focus ? (
+          <div>
+            <MiniLoader />
+          </div>
+        ) : (
           <>
-            <Table striped bordered hover responsive>
-              {results.length > 0 ? (
-                <tbody>
-                  {results.map((customer, index) => (
-                    <tr
-                      key={index}
-                      onMouseDown={() => onSelectCustomer(customer)}
-                    >
-                      <td>{customer.customer_first_name}</td>
-                      <td>{customer.customer_last_name}</td>
-                      <td>{customer.customer_email}</td>
-                      <td>{customer.customer_phone_number}</td>
-                      <td>
-                        <FaHandPointUp size={22} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              ) : (
-                query && (
-                  <tbody>
-                    <tr>
-                      <td colSpan={8} className="text-center py-3">
-                        No Customers found
-                      </td>
-                    </tr>
-                  </tbody>
-                )
-              )}
-            </Table>
-            <div className="d-flex justify-content-end mt-3">
-              <Pagination>
-                <Pagination.Prev
-                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                />
-                <Pagination.Item active>{1}</Pagination.Item>
-                <Pagination.Next>
-                  <FaArrowRight className="ms-1" />
-                </Pagination.Next>
-              </Pagination>
-            </div>
+            {focus && (
+              <>
+                <Table striped bordered hover responsive>
+                  {results.length > 0 ? (
+                    <tbody>
+                      {results.map((customer, index) => (
+                        <tr
+                          key={index}
+                          onMouseDown={() => onSelectCustomer(customer)}
+                        >
+                          <td>{customer.customer_first_name}</td>
+                          <td>{customer.customer_last_name}</td>
+                          <td>{customer.customer_email}</td>
+                          <td>{customer.customer_phone_number}</td>
+                          <td>
+                            <FaHandPointUp size={22} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  ) : (
+                    query && (
+                      <tbody>
+                        <tr>
+                          <td colSpan={8} className="text-center py-3">
+                            No Customers found
+                          </td>
+                        </tr>
+                      </tbody>
+                    )
+                  )}
+                </Table>
+                <div className="d-flex justify-content-end mt-3">
+                  <Pagination>
+                    <Pagination.Prev
+                      onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                    />
+                    <Pagination.Item active>{1}</Pagination.Item>
+                    <Pagination.Next>
+                      <FaArrowRight className="ms-1" />
+                    </Pagination.Next>
+                  </Pagination>
+                </div>
+              </>
+            )}
           </>
         )}
+        <>
+          {!focus && (
+            <Button
+              className="theme-btn btn-style-one"
+              onClick={() => navigate("/admin/add-customers")}
+            >
+              ADD NEW CUSTOMER
+            </Button>
+          )}
+        </>
       </div>
-
-      {!focus && (
-        <Button
-          className="theme-btn btn-style-one"
-          onClick={() => navigate("/admin/add-customers")}
-        >
-          ADD NEW CUSTOMER
-        </Button>
-      )}
     </div>
   );
 }

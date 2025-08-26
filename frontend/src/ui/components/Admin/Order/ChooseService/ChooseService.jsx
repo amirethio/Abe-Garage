@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { fetchService } from "./../../../../../services/service.service";
+import { LargeLoader } from "../../../Loader";
 
 function ChooseService({ selectedService, setSelectedService, setfinish }) {
   const [services, setservices] = useState([]);
@@ -14,10 +15,13 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
     service_selection: "",
     service_description: "",
   });
+    const [loading, setLoading] = useState(true); 
+
 
   useEffect(() => {
     fetchService().then((res) => {
       setservices(res);
+      setLoading(false)
     });
   }, []);
 
@@ -88,44 +92,48 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
 
   return (
     <>
-      <section className="contact-section custom-bg pl-4 responsive-form pb-0 pr-5">
-        <div className="auto-container contact-title ml-6 pl-5">
-          <h2 className="mb-4">Choose service</h2>
-          {services.length > 0 ? (
-            services.map((service, index) => (
-              <div
-                key={index}
-                className="d-flex justify-content-between align-items-start border rounded p-3 mb-3 shadow-sm bg-white"
-              >
-                <div>
-                  <h4 className="mb-2">{service.service_name}</h4>
-                  <p className="mb-0 text-muted">
-                    {service.service_description}
-                  </p>
-                </div>
+      {loading ? (
+        <LargeLoader />
+      ) : (
+        <section className="contact-section custom-bg pl-4 responsive-form pb-0 pr-5">
+          <div className="auto-container contact-title ml-6 pl-5">
+            <h2 className="mb-4">Choose service</h2>
+            {services.length > 0 ? (
+              services.map((service, index) => (
+                <div
+                  key={index}
+                  className="d-flex justify-content-between align-items-start border rounded p-3 mb-3 shadow-sm bg-white"
+                >
+                  <div>
+                    <h4 className="mb-2">{service.service_name}</h4>
+                    <p className="mb-0 text-muted">
+                      {service.service_description}
+                    </p>
+                  </div>
 
-                <div className="ms-3">
-                  <Form.Check
-                    type="checkbox"
-                    checked={selectedService.services.includes(
-                      service.service_id
-                    )}
-                    onChange={() => handleChange(service.service_id)}
-                    style={{ transform: "scale(1.5)", cursor: "pointer" }}
-                  />
+                  <div className="ms-3">
+                    <Form.Check
+                      type="checkbox"
+                      checked={selectedService.services.includes(
+                        service.service_id
+                      )}
+                      onChange={() => handleChange(service.service_id)}
+                      style={{ transform: "scale(1.5)", cursor: "pointer" }}
+                    />
+                  </div>
                 </div>
+              ))
+            ) : (
+              <h5>No services available</h5>
+            )}
+            {errors.service_selection && (
+              <div className="text-danger small mt-2">
+                {errors.service_selection}
               </div>
-            ))
-          ) : (
-            <h5>No services available</h5>
-          )}
-          {errors.service_selection && (
-            <div className="text-danger small mt-2">
-              {errors.service_selection}
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="contact-section custom-bg pl-4 responsive-form pr-5 pt-0">
         <div className="auto-container contact-title ml-6 pl-5">

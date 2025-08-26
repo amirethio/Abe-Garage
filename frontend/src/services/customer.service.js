@@ -42,3 +42,20 @@ export const updatecustomer = async (formData) => {
     return error.response.data;
   }
 };
+
+export const deleteCustomer = async (id) => {
+  try {
+    console.log("here too");
+    console.log(id);
+    
+    
+    const response = await axiosInstance.delete(`/api/vehicle/${id}`);
+    console.log(response);
+    
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    
+    return;
+  }
+};

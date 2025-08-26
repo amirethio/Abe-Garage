@@ -117,11 +117,17 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
           {/* Employee & Dates */}
           <div className="rowu">
             <div className="col-card">
-              <div className="card-section">
+              <div className="card-section px-3 py-0">
+                <h6 className="section-title">
+                  <FaUserTie className="icon" /> Registered By
+                </h6>
+                <p>{orderData.employee_first_name || "Unassigned"}</p>
+              </div>
+              <div className="card-section px-3 py-0">
                 <h6 className="section-title">
                   <FaUserTie className="icon" /> Assigned Employee
                 </h6>
-                <p>{orderData.employee_first_name || "Unassigned"}</p>
+                <p>{orderData.selected_employee || "Unassigned"}</p>
               </div>
             </div>
 
@@ -164,7 +170,7 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
               </div>
             </div>
           </div>
-          <div className="order-status-container">
+          <div className="order-status-container mt-0">
             <label htmlFor="order-status" className="order-status-label">
               Order Status:
             </label>

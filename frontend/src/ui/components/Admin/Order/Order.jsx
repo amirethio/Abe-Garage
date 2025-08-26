@@ -50,7 +50,6 @@ function Order() {
   return (
     <>
       <section className="contact-section custom-bg pl-5 responsive-form">
-        {/* {console.log(formData)} */}
         <ChooseCustomer
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}

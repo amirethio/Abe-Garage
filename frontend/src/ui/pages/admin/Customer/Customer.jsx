@@ -5,13 +5,18 @@ import Customers from "../../../components/Admin/Customer/Customers";
 
 function Customer() {
   return (
-    <div className="row best-bg responsive-admin-page">
-      <div className="col-lg-3 col-md-4 col-sm-12 pl-0 pr-0">
-        <AdminMenu />
+    <div className="row responsive-admin-page admin-page ">
+      <div className="col-lg-3 col-md-4 col-sm-12 pl-0 pr-0 bgw">
+        <aside className="admin-sidebar sticky-menu">
+          <AdminMenu />
+        </aside>
       </div>
       <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0">
-        {/* <CustomerList/> */}
-        <Customers/>
+        <main className="admin-main">
+          <div className="admin-content">
+            <Customers />
+          </div>
+        </main>
       </div>
     </div>
   );

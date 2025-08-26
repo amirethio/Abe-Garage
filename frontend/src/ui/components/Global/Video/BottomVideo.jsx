@@ -62,14 +62,14 @@ function BottomVideo({ text, video = false, page, img ,height }) {
             </div>
           )}
           {page && (
-            <ul class="page-breadcrumb">
+            <ul className="page-breadcrumb">
               <li>
                 <a href="index.html">home &gt;</a>
               </li>
               <li>{page}</li>
             </ul>
           )}
-          <div class="auto-container"></div>
+          <div className="auto-container"></div>
         </div>
       </div>
     </section>

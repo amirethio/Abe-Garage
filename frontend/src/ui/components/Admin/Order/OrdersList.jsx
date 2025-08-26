@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { format } from "date-fns";
-import { listOrder } from "../../../../services/order.service";
+import { listOrder, deleteOrder } from "../../../../services/order.service";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import OrderDetailModal from "./OrderDetail";
@@ -13,12 +13,18 @@ function OrdersList() {
   const [IsDetail, setIsDetail] = useState(false);
   const [singleOrder , setSingleOrder] = useState({})
   const [fetch, setFetch] = useState(false);
+  const [IsDelete , setIsDelete] =  useState(false)
 
+  const handleDelete =  (id)=>{
+deleteOrder(id).then(()=>{
+  setIsDelete((pre)=>!pre)
+})
+  }
   useEffect(() => {
     listOrder().then((data) => {
       setOrderData(data);
     });
-  }, [fetch]);
+  }, [fetch , IsDelete]);
 
   return (
     <>
@@ -26,7 +32,8 @@ function OrdersList() {
         <OrderDetailModal
           orderData={singleOrder}
           setIsDetail={setIsDetail}
-          setFetch={setFetch}/>
+          setFetch={setFetch}
+        />
       )}
 
       <div className="admin-right-side p-4">
@@ -99,7 +106,11 @@ function OrdersList() {
                         >
                           <Link>Edit/View</Link>
                         </Button>
-                        <Button variant="danger" size="sm">
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => handleDelete(order.order_id)}
+                        >
                           <Link to={``}>Delete</Link>
                         </Button>
                       </div>

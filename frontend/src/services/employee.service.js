@@ -9,8 +9,6 @@ export const submitEmployee = async (formData) => {
   }
 };
 
-
-
 export const listEmployee = async () => {
   try {
     const response = await axiosInstance.get("/api/employees");
@@ -32,12 +30,20 @@ export const singleEmployee = async (id) => {
   }
 };
 
-
 export const updateEmployee = async (formData) => {
-   try {
-     const response = await axiosInstance.put("/api/employees", formData);
-     return response.data;
-   } catch (error) {
-     return error.response.data;
-   }
-}
+  try {
+    const response = await axiosInstance.put("/api/employees", formData);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const deleteEmployee = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/api/employee/${id}`);
+    return response.data;
+  } catch (error) {
+    return
+  }
+};

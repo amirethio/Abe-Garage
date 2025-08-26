@@ -46,3 +46,12 @@ export const updateOrder = async (updated_status) => {
     console.log(error);
   }
 };
+
+export const deleteOrder = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`api/order/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

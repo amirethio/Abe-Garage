@@ -13,7 +13,7 @@ function ChooseCustomer({ selectedCustomer, setSelectedCustomer }) {
   return (
     <section>
       <div className="auto-container contact-title ml-6 pl-5">
-        <h2>Create a new order</h2>
+        <h2>Create a new Order</h2>
       </div>
 
       {!selectedCustomer ? (

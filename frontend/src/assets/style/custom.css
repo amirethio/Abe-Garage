@@ -354,6 +354,9 @@ input:disabled {
   }
 }
 
+.responsive-admin-page{
+  background-color: #F6F7FA;
+}
 /* header */
 .main-header .link-btn a {
   color: white;

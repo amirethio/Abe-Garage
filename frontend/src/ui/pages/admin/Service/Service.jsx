@@ -4,12 +4,18 @@ import ServicesSection from '../../../components/Admin/ServicesSection';
 
 function Service() {
   return (
-    <div className="row  responsive-admin-page">
-      <div className="col-lg-3 col-md-4 col-sm-12 pl-0 pr-0">
-        <AdminMenu/>
+    <div className="row responsive-admin-page admin-page ">
+      <div className="col-lg-3 col-md-4 col-sm-12 pl-0 pr-0 bgw">
+        <aside className="admin-sidebar sticky-menu">
+          <AdminMenu />
+        </aside>
       </div>
-      <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0 ">
-       <ServicesSection/>
+      <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0">
+        <main className="admin-main">
+          <div className="admin-content">
+            <ServicesSection />
+          </div>
+        </main>
       </div>
     </div>
   );
