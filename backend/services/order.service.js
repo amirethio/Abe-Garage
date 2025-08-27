@@ -212,10 +212,38 @@ async function deleteOrder(order_id) {
   }
 }
 
+async function getSingleOrder(hash) {
+  try {
+    const sql = `SELECT
+    orders.order_id,
+    orders.order_date,
+    customer_info.customer_first_name,
+    customer_identifier.customer_email,
+    customer_identifier.customer_phone_number,
+    customer_vehicle_info.vehicle_make,
+    customer_vehicle_info.vehicle_model,
+    customer_vehicle_info.vehicle_year,
+    customer_vehicle_info.vehicle_serial,
+    employee_info.employee_first_name,
+    order_status.order_status
+    FROM orders 
+    INNER JOIN customer_info ON  orders.customer_id = customer_info.customer_id
+    INNER JOIN customer_identifier ON  orders.customer_id = customer_identifier.customer_id
+    INNER JOIN customer_vehicle_info ON  orders.vehicle_id = customer_vehicle_info.vehicle_id
+    INNER JOIN employee_info ON  orders.employee_id = employee_info.employee_id
+    INNER JOIN order_status ON  orders.order_id = order_status.order_id where orders.order_hash = ?
+  `;
+    const response = await db.query(sql, [hash]);
+    return response;
+  } catch (error) {
+    return;
+  }
+}
 module.exports = {
   addOrder,
   fetchOredrs,
   getOrder,
   updateOrder,
   deleteOrder,
+  getSingleOrder,
 };

@@ -36,6 +36,23 @@ async function getOrder(req, res, next) {
   }
 }
 
+
+async function getSingleOrder(req, res, next) {
+  try {
+    const response = await orderService.getSingleOrder(req.params.hash);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(501).json({
+      sucess: false,
+      message: "something went wrong",
+    });
+  }
+};
+
+
+
+
+
 async function updateOrder(req, res, next) {
   try {
     const response = await orderService.updateOrder(req.body);
@@ -66,4 +83,5 @@ module.exports = {
   getOrder,
   updateOrder,
   deleteOrder,
+  getSingleOrder,
 };

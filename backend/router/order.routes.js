@@ -24,6 +24,12 @@ router.get(
   authorizeRoles(2, 3),
   orderController.getOrder
 );
+router.get(
+  "/api/track/:hash",
+  authMiddleware,
+  authorizeRoles(2, 3),
+  orderController.getSingleOrder
+);
 
 router.put(
   "/api/order",
