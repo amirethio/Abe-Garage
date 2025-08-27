@@ -1,6 +1,9 @@
-comming from template
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+}
 
-/* Custom styles for the garage app */
 .signin-signout {
   padding: 0 55px;
 }
@@ -354,8 +357,8 @@ input:disabled {
   }
 }
 
-.responsive-admin-page{
-  background-color: #F6F7FA;
+.responsive-admin-page {
+  background-color: #f6f7fa;
 }
 /* header */
 .main-header .link-btn a {
@@ -569,14 +572,13 @@ textarea.form-controlu {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* semi-transparent background */
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: flex-start; /* align top if needed */
   padding-top: 100px; /* adjust if you have a sticky header height */
   z-index: 200000000000; /* ensure it’s above sticky header */
 }
-
 
 .modal-wrapper {
   background: #fff;
@@ -586,7 +588,7 @@ textarea.form-controlu {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* header css */
@@ -785,7 +787,6 @@ textarea.form-controlu {
   color: #007bff; /* blue */
 }
 
-
 /* track order css
  */
 
@@ -793,7 +794,7 @@ textarea.form-controlu {
   display: flex;
   align-items: center;
   width: 100%;
- 
+
   margin-bottom: 1.5rem;
 }
 
@@ -806,7 +807,7 @@ textarea.form-controlu {
   font-size: 1rem;
   background-color: #f9f9f9;
   transition: all 0.3s ease;
-   max-width: 900px;
+  max-width: 900px;
 }
 
 .track-order-wrapper input:focus {
@@ -832,3 +833,22 @@ textarea.form-controlu {
   background-color: #0b5ed7;
 }
 
+/* responsive */
+.main-menu .navigation > li {
+  padding:  0 !important;
+}
+.main-header .nav-outer .main-menu,
+.sticky-header {
+  display: flex;
+}
+
+.main-header .header-upper .search-btn {
+  position: relative;
+  display: block;
+}
+.main-header .header-upper .link-btn {
+  display: block;
+}
+    .main-header .nav-outer .main-menu, .sticky-header {
+        display: block !important;
+    }

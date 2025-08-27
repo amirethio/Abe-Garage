@@ -21,12 +21,14 @@ import Orders from "./ui/pages/admin/Order/Orders";
 import Profile from "./ui/pages/admin/Customer/Profile";
 import ScrollToTop from "./ui/components/ScrollToTop";
 import TrackOrder from "./ui/pages/Global/TrackOrder";
+import MobileMenu from "./ui/components/Global/MobileMenu";
+import AdminSidebar from "./ui/components/Admin/AdminSidebar";
 
 
 function App() {
   return (
     <>
-    <ScrollToTop/>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -36,6 +38,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route path="/track" element={<TrackOrder />} />
+        <Route path="/test" element={<AdminSidebar />} />
         <Route
           path="/admin"
           element={
@@ -55,7 +58,7 @@ function App() {
         <Route
           path="/admin/add-customers"
           element={
-            <PrivateAuth role={[2,3]}>
+            <PrivateAuth role={[2, 3]}>
               <AddCustomers />
             </PrivateAuth>
           }
@@ -63,7 +66,7 @@ function App() {
         <Route
           path="/admin/employees"
           element={
-            <PrivateAuth role={[2,3]}>
+            <PrivateAuth role={[2, 3]}>
               <Employee />
             </PrivateAuth>
           }
@@ -79,7 +82,7 @@ function App() {
         <Route
           path="/admin/customers"
           element={
-            <PrivateAuth role={[1,2,3]}>
+            <PrivateAuth role={[1, 2, 3]}>
               <Customer />
             </PrivateAuth>
           }
@@ -95,8 +98,8 @@ function App() {
         <Route
           path="/admin/profile/:hash"
           element={
-            <PrivateAuth role={[1,2,3]}>
-              <Profile/>
+            <PrivateAuth role={[1, 2, 3]}>
+              <Profile />
             </PrivateAuth>
           }
         />
@@ -104,15 +107,15 @@ function App() {
         <Route
           path="/admin/new-order"
           element={
-            <PrivateAuth role={[1,2,3]}>
-              <NewOrder/>
+            <PrivateAuth role={[1, 2, 3]}>
+              <NewOrder />
             </PrivateAuth>
           }
         />
         <Route
           path="/admin/services"
           element={
-            <PrivateAuth role={[2,3]}>
+            <PrivateAuth role={[2, 3]}>
               <Service />
             </PrivateAuth>
           }
@@ -120,7 +123,7 @@ function App() {
         <Route
           path="/admin/orders"
           element={
-            <PrivateAuth role={[2,3]}>
+            <PrivateAuth role={[2, 3]}>
               <Orders />
             </PrivateAuth>
           }

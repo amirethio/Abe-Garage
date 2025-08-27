@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import { Link } from "react-router-dom";
 import logo from "./../../../../assets/images/logo.png";
 import useAuth from "../../../../hook/useAuth";
-
+import { FaBars } from "react-icons/fa"; // Hamburger icon
+import MobileMenu from "../MobileMenu";
 function Header() {
   const context = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const openMenu = () => setMenuOpen(true);
+  const closeMenu = () => setMenuOpen(false);
+
+
 
   const logout = () => {
     context.setuserState(false);
@@ -17,8 +24,8 @@ useEffect(() => {
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
-      topHeader.classList.add("hide"); // hide small header
-      mainHeader.classList.add("shrink"); // make main header fixed / sticky
+      topHeader.classList.add("hide"); 
+      mainHeader.classList.add("shrink"); 
     } else {
       topHeader.classList.remove("hide");
       mainHeader.classList.remove("shrink");
@@ -63,46 +70,57 @@ useEffect(() => {
             </div>
 
             <div className="right-column d-flex align-items-center">
-              <div className="nav-outer">
-                <nav className="main-menu navbar-expand-md navbar-light">
-                  <ul className="navigation d-flex list-unstyled mb-0">
-                    <li className="dropdown">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="dropdown">
-                      <Link to="/about">About Us</Link>
-                    </li>
-                    <li className="dropdown">
-                      <Link to="/services">Services</Link>
-                    </li>
-                    <li>
-                      <Link to="/contact">Contact Us</Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-
-              {/* Admin Panel Link */}
-              {context?.userData?.employee_role === 3 && (
-                <div className="search-btn ml-3">
-                  <Link to="/admin" className="admin-panel">
-                    Dashboard
-                  </Link>
+              <div className="my d-none d-lg-flex align-items-center py-2">
+                <div className="nav-outer">
+                  <nav className="main-menu  navbar-light">
+                    <ul className="navigation d-flex list-unstyled mb-0">
+                      <li className="dropdown">
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className="dropdown">
+                        <Link to="/about">About Us</Link>
+                      </li>
+                      <li className="dropdown">
+                        <Link to="/services">Services</Link>
+                      </li>
+                      <li>
+                        <Link to="/contact">Contact Us</Link>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
-              )}
-
-              {/* Login / Logout */}
-              <div className="link-btn ml-3">
-                {context?.userData ? (
-                  <Link className="theme-btn btn-style-zero" onClick={logout}>
-                    Logout
-                  </Link>
-                ) : (
-                  <Link className="theme-btn btn-style-zero" to="/login">
-                    Login
-                  </Link>
+                {(context?.userData?.employee_role === 3 ||
+                  context?.userData?.employee_role == 2) && (
+                  <div className="search-btn ml-3">
+                    <Link to="/admin" className="admin-panel">
+                      Dashboard
+                    </Link>
+                  </div>
                 )}
+                <div className="link-btn ml-3">
+                  {context?.userData ? (
+                    <Link className="theme-btn btn-style-zero" onClick={logout}>
+                      Logout
+                    </Link>
+                  ) : (
+                    <Link className="theme-btn btn-style-zero" to="/login">
+                      Login
+                    </Link>
+                  )}
+                </div>
               </div>
+              <div className="d-block d-lg-none py-3">
+                <FaBars
+                  size={28}
+                  onClick={openMenu}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+              <MobileMenu
+                isOpen={menuOpen}
+                closeMenu={closeMenu}
+                logout={logout}
+              />
             </div>
           </div>
         </div>
