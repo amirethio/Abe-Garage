@@ -20,6 +20,7 @@ import Service from "./ui/pages/admin/Service/Service";
 import Orders from "./ui/pages/admin/Order/Orders";
 import Profile from "./ui/pages/admin/Customer/Profile";
 import ScrollToTop from "./ui/components/ScrollToTop";
+import TrackOrder from "./ui/pages/Global/TrackOrder";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
-        <Route path="/test" element={<NotAuthorized />} />
+        <Route path="/track" element={<TrackOrder />} />
         <Route
           path="/admin"
           element={

@@ -8,6 +8,8 @@ import { format } from "date-fns";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Loader, { MiniLoader } from "../../Loader";
 import { fetchVechile } from "../../../../services/vehicle.service";
+import { FaCalendarCheck } from "react-icons/fa";
+
 function CustomerProfile() {
   const [customer, setCustomer] = useState({});
   const [orderData, setOrderData] = useState([]);

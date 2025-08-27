@@ -1,7 +1,6 @@
 // Same functionality — only CSS will make it responsive
 import React, { useState } from "react";
 import { submitEmployee } from "../../../../services/employee.service";
-import { useNavigate } from "react-router-dom";
 
 function EmployeeForm() {
   const [formData, setFormData] = useState({
@@ -14,8 +13,8 @@ function EmployeeForm() {
     active_employee: 1,
   });
   const [errors, setErrors] = useState({});
+  const [sucess , setsucess] =  useState("")
   const [ServerError, setServerError] = useState("");
-  const navigate = useNavigate();
 
   function handleChange(event) {
     setErrors({});
@@ -62,7 +61,7 @@ function EmployeeForm() {
         setServerError(data.error);
         return;
       }
-      setServerError("Registered Sucessfully");
+      setsucess("Registered Sucessfully");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
@@ -80,6 +79,16 @@ function EmployeeForm() {
               role="alert"
             >
               {ServerError}
+            </div>
+          </div>
+        )}
+        {sucess && (
+          <div className="d-flex mt-3">
+            <div
+              className="alert alert-success py-2 px-3 shadow-sm"
+              role="alert"
+            >
+              {sucess}
             </div>
           </div>
         )}

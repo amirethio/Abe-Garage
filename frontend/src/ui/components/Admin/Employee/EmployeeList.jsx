@@ -6,27 +6,26 @@ import {
   deleteEmployee,
 } from "../../../../services/employee.service";
 import { Link } from "react-router-dom";
-import {LargeLoader} from "../../Loader";
+import { LargeLoader } from "../../Loader";
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
-  const [deletestatus , setDeleteStatus] =  useState(false)
-  const [loading, setLoading] = useState(true); 
+  const [deletestatus, setDeleteStatus] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleDelete = (id) => {
-    deleteEmployee(id).then(()=>{
+    deleteEmployee(id).then(() => {
       setDeleteStatus((pre) => !pre);
-    })
-    
+    });
   };
   useEffect(() => {
     listEmployee().then((data) => {
       setEmployees(data);
-      setLoading(false)
+      setLoading(false);
     });
   }, [deletestatus]);
-if(loading){
-  return <LargeLoader />;
-}
+  if (loading) {
+    return <LargeLoader />;
+  }
   return (
     <div className="admin-right-side p-4">
       {console.log(deletestatus)}
@@ -48,8 +47,8 @@ if(loading){
             </tr>
           </thead>
           <tbody>
-            {employees.length > 0 ? (
-              employees.map((employee) => (
+            {employees?.length > 0 ? (
+              employees?.map((employee) => (
                 <tr key={employee.employee_id}>
                   <td>{employee.active_employee ? "Yes" : "No"}</td>
                   <td>{employee.employee_first_name}</td>

@@ -60,9 +60,9 @@ function CustomerSearch({
           </div>
         </div>
         {loading && focus ? (
-          <div>
+         
             <MiniLoader />
-          </div>
+        
         ) : (
           <>
             {focus && (

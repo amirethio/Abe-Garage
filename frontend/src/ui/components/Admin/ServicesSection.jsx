@@ -77,9 +77,6 @@ const ServicesSection = () => {
               </div>
 
               <div className="ms-3">
-                <button className="btn btn-outline-primary btn-sm rounded-circle me-2">
-                  <FaEdit />
-                </button>
                 <button
                   className="btn btn-outline-danger btn-sm rounded-circle"
                   onClick={() => handleDelete(service.service_id)}

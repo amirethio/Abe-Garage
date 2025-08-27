@@ -10,7 +10,6 @@ import { deleteCustomer } from "./../../../../services/customer.service";
 import {LargeLoader} from "../../Loader";
 
 
-
 function Customers() {
   const [query, setQuery] = useState("");
   const [result, setResults] = useState([]);

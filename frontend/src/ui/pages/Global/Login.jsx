@@ -3,12 +3,13 @@ import { useState } from "react";
 import { submitLogin } from "../../../services/login.service";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hook/useAuth";
-
+import { setAccessToken } from "../../../API/axiosInstance";
 function Login() {
   const [formData, setFormData] = useState({
     employee_email: "",
     employee_password: "",
   });
+
   const [error, setErrors] = useState("");
   const [validationError, setvalidationError] = useState("");
   const navigate = useNavigate();
@@ -52,8 +53,9 @@ function Login() {
       } else {
         context.setuserState(true);
         localStorage.setItem("authToken", submitForm?.data?.employee_token);
+        setAccessToken(submitForm?.data?.employee_token);
         navigate("/");
-      }
+      } 
     } catch (err) {
       console.log(err);
 

@@ -784,3 +784,50 @@ textarea.form-controlu {
 .order-status-select.status-2 {
   color: #007bff; /* blue */
 }
+
+
+/* track order css
+ */
+
+.track-order-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+ 
+  margin-bottom: 1.5rem;
+}
+
+.track-order-wrapper input {
+  flex: 1;
+  height: 48px;
+  padding: 0 15px;
+  border-radius: 8px 0 0 8px; /* rounded left only */
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+   max-width: 900px;
+}
+
+.track-order-wrapper input:focus {
+  outline: none;
+  /* border-color: #0d6efd; */
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+
+.track-order-wrapper button {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 0 8px 8px 0; /* rounded right only */
+  border: none;
+  background-color: #0d6efd;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.track-order-wrapper button:hover {
+  background-color: #0b5ed7;
+}

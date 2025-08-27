@@ -32,7 +32,6 @@ useEffect(() => {
 
   return (
     <header className="main-header header-style-one head">
-      {/* Top Header */}
       <div className="header-top">
         <div className="auto-container">
           <div className="inner-container d-flex justify-content-between">
@@ -52,12 +51,9 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
-      {/* Main Header (Sticky) */}
       <div className="header-upper">
         <div className="auto-container">
           <div className="inner-container d-flex justify-content-between align-items-center">
-            {/* Logo */}
             <div className="logo-box">
               <div className="logo">
                 <Link to="/">
@@ -66,7 +62,6 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Navigation */}
             <div className="right-column d-flex align-items-center">
               <div className="nav-outer">
                 <nav className="main-menu navbar-expand-md navbar-light">

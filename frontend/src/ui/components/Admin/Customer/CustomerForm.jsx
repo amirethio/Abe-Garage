@@ -13,6 +13,8 @@ function CustomerForm() {
 
   const [errors, setErrors] = useState({});
   const [ServerError, setServerError] = useState("");
+    const [sucess, setSucess] = useState("");
+  
   const navigate = useNavigate();
 
   function handleChange(event) {
@@ -58,7 +60,7 @@ function CustomerForm() {
         setServerError(data.message);
         return;
       }
-      setServerError("customer registered sucessfully");
+      setSucess("customer registered sucessfully");
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
@@ -75,6 +77,16 @@ function CustomerForm() {
               role="alert"
             >
               {ServerError}
+            </div>
+          </div>
+        )}
+        {sucess && (
+          <div className="d-flex mt-3">
+            <div
+              className="alert alert-success py-2 px-3 shadow-sm"
+              role="alert"
+            >
+              {sucess}
             </div>
           </div>
         )}

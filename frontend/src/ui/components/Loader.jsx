@@ -15,6 +15,7 @@ export const MiniLoader = ()=>{
           justifyContent: "center",
           width: "100%",
           padding: "50px",
+          borderRadius:"60px"
         }}
         className="me"
       >
