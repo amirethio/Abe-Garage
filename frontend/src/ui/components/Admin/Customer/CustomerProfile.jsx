@@ -145,7 +145,7 @@ function CustomerProfile() {
                         </tr>
                       </thead>
                       <tbody>
-                        {orderData.map((order, index) => (
+                        {orderData.map((order) => (
                           <React.Fragment key={order.order_id}>
                             <tr key={order.order_id}>
                               <td>{order.order_id}</td>

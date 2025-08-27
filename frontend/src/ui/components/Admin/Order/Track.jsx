@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function TrackOrderInput({ onSubmit, }) {
+function TrackOrderInput({  sethash }) {
   const [orderId, setOrderId] = useState("");
 
   const handleChange = (e) => setOrderId(e.target.value);
@@ -9,7 +9,7 @@ function TrackOrderInput({ onSubmit, }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (orderId.trim()) {
-      onSubmit(orderId);
+      sethash(orderId)
     }
   };
 

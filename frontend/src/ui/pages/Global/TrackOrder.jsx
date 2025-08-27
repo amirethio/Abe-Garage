@@ -1,15 +1,15 @@
 import React from 'react'
 import Track from '../../components/Admin/Order/Track'
-import CustomerProfile from '../../components/Admin/Customer/CustomerProfile'
 import { useState } from 'react';
+import OrderProfile from '../../components/Admin/Order/OrderProfile';
 
 function TrackOrder() {
-const [data , setData] = useState("")
+const [hash, sethash] = useState("");
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center pt-5">
-      <Track />
-      {/* <CustomerProfile/> */}
+    <div className=" pt-5">
+      <Track sethash={sethash} />
+      <div>{hash && <OrderProfile hash={hash} />}</div>
     </div>
   );
 }

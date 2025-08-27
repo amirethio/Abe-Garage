@@ -55,3 +55,12 @@ export const deleteOrder = async (id) => {
     console.log(error);
   }
 };
+
+export const getSingleOrder = async (hash) => {
+  try {
+    const response = await axiosInstance.get(`api/track/${hash}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

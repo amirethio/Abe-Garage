@@ -813,7 +813,7 @@ textarea.form-controlu {
   outline: none;
   /* border-color: #0d6efd; */
   background-color: #fff;
-  box-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+  /* box-shadow: 0 0 6px rgba(13, 110, 253, 0.3); */
 }
 
 .track-order-wrapper button {
@@ -831,3 +831,4 @@ textarea.form-controlu {
 .track-order-wrapper button:hover {
   background-color: #0b5ed7;
 }
+
