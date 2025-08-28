@@ -36,10 +36,10 @@ deleteOrder(id).then(()=>{
         />
       )}
 
-      <div className="admin-right-side p-4">
-        <section className="contact-section">
+      <div className="admin-right-side p-4 pt-0">
+        <section className="contact-section pt-0 ">
           <div className="contact-title mb-4">
-            <h2>Orders</h2>
+            <h2 className="mt-0">Orders</h2>
           </div>
           <Table striped bordered hover responsive>
             <thead>
@@ -104,14 +104,16 @@ deleteOrder(id).then(()=>{
                             setIsDetail(true);
                           }}
                         >
-                          <Link>Edit/View</Link>
-                        </Button>
+                          <i className="bi bi-pencil-square me-1">{"      "}.</i>{" "}
+                          Edit{" "}
+                        </Button>{" "}
                         <Button
                           variant="danger"
                           size="sm"
                           onClick={() => handleDelete(order.order_id)}
                         >
-                          <Link to={``}>Delete</Link>
+                          {" "}
+                          <i className="bi bi-trash me-1"></i> Delete{" "}
                         </Button>
                       </div>
                     </td>
@@ -133,3 +135,4 @@ deleteOrder(id).then(()=>{
 }
 
 export default OrdersList;
+

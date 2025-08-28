@@ -17,6 +17,8 @@ function EmployeeForm() {
   const [ServerError, setServerError] = useState("");
 
   function handleChange(event) {
+    setServerError("");
+    setsucess("")
     setErrors({});
     const { value, name } = event.target;
     setFormData((prev) => ({
@@ -51,6 +53,8 @@ function EmployeeForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const validateResponse = validateForm();
+    setServerError("");
+    setsucess("");
     if (Object.keys(validateResponse).length > 0) {
       setErrors(validateResponse);
       return;

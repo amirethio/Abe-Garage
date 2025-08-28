@@ -10,14 +10,25 @@ function AdminLayout({ children }) {
 
   return (
     <div className="row responsive-admin-page admin-page ">
-      <div className="admin-layout ">
-        <AdminSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className="admin-layout">
+        <AdminSidebar
+          isOpen={sidebarOpen}
+          toggleSidebar={toggleSidebar}
+          setSidebarOpen={setSidebarOpen}
+        />
         <button
           onClick={toggleSidebar}
-          className="btn btn-primary m-3 d-lg-none"
-          style={{ cursor: "pointer", backgroundColor: "#222B48" }}
+          className="btn d-lg-none "
+          style={{
+            cursor: "pointer",
+            backgroundColor: "#222B48",
+            position: "fixed",
+            top: "120px",
+            left: "20px",
+            zIndex: 109999950,
+          }}
         >
-          <FaAngleDoubleRight />
+          <FaAngleDoubleRight size={24} color="white" />
         </button>
       </div>
       <div className="d-none d-lg-block col-lg-3 col-md-4 col-sm-12 pl-0 pr-0 bgw">
@@ -25,13 +36,9 @@ function AdminLayout({ children }) {
           <AdminMenu />
         </aside>
       </div>
-      <div className="col-lg-9 col-md-8 col-sm-12 pl-0 pr-0">
+      <div className="col-lg-9  col-sm-12 pl-0 pr-0 mt-5">
         <main className="admin-main">
-          <div className="admin-content">
-            {
-                children
-            }
-          </div>
+          <div className="admin-content">{children}</div>
         </main>
       </div>
     </div>

@@ -3,11 +3,11 @@ import { Table, Button } from "react-bootstrap";
 import { FaSearch, FaHandPointUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function CustomerVhicle({ order }) {
+function CustomerVhicle({ results }) {
   return (
     <>
-      <section className=" p-0  pl-3 responsive-form container mt-4 ">
-        <div className="auto-container contact-title ml-6 pl-5  shadow p-1 add-vechile mr-3">
+      {/* <section className=" p-0  pl-3 responsive-form container mt-4 ">
+        <div className="auto-container contact-title ml-6  shadow p-1 add-vechile mr-3"> */}
           <div className="container mt-4">
             <Table striped bordered hover responsive>
               <>
@@ -24,22 +24,24 @@ function CustomerVhicle({ order }) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{order.vehicle_year}</td>
-                    <td>{order.vehicle_make}</td>
-                    <td>{order.vehicle_type}</td>
-                    <td>{order.vehicle_mileage}</td>
-                    <td>{order.vehicle_model}</td>
-                    <td>{order.vehicle_tag}</td>
-                    <td>{order.vehicle_serial}</td>
-                    <td>{order.vehicle_color}</td>
-                  </tr>
+                  {results.map((result) => (
+                    <tr>
+                      <td>{result?.vehicle_year}</td>
+                      <td>{result?.vehicle_make}</td>
+                      <td>{result?.vehicle_type}</td>
+                      <td>{result?.vehicle_mileage}</td>
+                      <td>{result?.vehicle_model}</td>
+                      <td>{result?.vehicle_tag}</td>
+                      <td>{result?.vehicle_serial}</td>
+                      <td>{result?.vehicle_color}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </>
             </Table>
           </div>
-        </div>
-      </section>
+        {/* </div>
+      </section> */}
     </>
   );
 }

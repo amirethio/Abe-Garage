@@ -64,7 +64,7 @@ function Login() {
   };
   return (
     <section className="contact-section custom-bg pl-5">
-      <div className="auto-container contact-title ml-6 pl-5">
+      <div className="auto-container contact-title ml-6 pl-5 pt-5">
         <h2>Login to your account</h2>
         <div className="row clearfix">
           <div className="form-column col-lg-7">

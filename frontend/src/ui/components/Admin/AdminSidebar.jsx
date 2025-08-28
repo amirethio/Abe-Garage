@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaTachometerAlt,
@@ -11,12 +11,21 @@ import {
   FaBars,
 } from "react-icons/fa";
 
-export default function AdminSidebar({ isOpen = true, toggleSidebar  }) {
+export default function AdminSidebar({ isOpen =true, toggleSidebar, setSidebarOpen }) {
   const location = useLocation();
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 992) {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
 
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setSidebarOpen]);
   return (
     <>
-      {/* Overlay */}
+      
       {isOpen && (
         <div
           className="sidebar-backdrop"
@@ -33,16 +42,16 @@ export default function AdminSidebar({ isOpen = true, toggleSidebar  }) {
         />
       )}
 
-      {/* Sidebar */}
+     
       <div
         className="admin-left-side"
         style={{
           position: "fixed",
-          top:"65px",
+          top: "61px",
           left: 0,
           height: "100vh",
           width: "250px",
-          background: "#fff",
+          background: "#222b48",
           boxShadow: "2px 0 8px rgba(0,0,0,0.2)",
           transform: isOpen ? "translateX(0)" : "translateX(-100%)",
           transition: "transform 0.3s ease-in-out",

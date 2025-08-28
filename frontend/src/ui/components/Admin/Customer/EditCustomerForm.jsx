@@ -174,18 +174,20 @@ function EditCustomerForm() {
                         </div>
                       )}
                     </div>
-                    <div className="form-group col-12">
+                    <div className="d-flex flex-wrap gap-5 align-items-center">
+                      <label for="activeCheck" className="pr-2">
+                        {" "}
+                        <h5>&nbsp; Is active customer</h5>
+                      </label>
                       <input
                         type="checkbox"
                         id="activeCheck"
                         name="vehicle3"
                         checked={formData.active_customer_status}
                         onChange={handleChange1}
+                        style={{ width: "auto" }}
                       />
-                      <label for="activeCheck">
-                        {" "}
-                        <h5>&nbsp; Is active customer</h5>
-                      </label>
+
                       <br></br>
                     </div>
 

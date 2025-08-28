@@ -54,7 +54,10 @@ function CustomerProfile() {
 
   return (
     <section className="history-section mt-5 pt-5">
-      {console.log(vehicleloading)}
+      {
+        console.log(results)
+        
+      }
       <div className="auto-container">
         <div className="history-block 1">
           <div className="years">info</div>
@@ -141,7 +144,7 @@ function CustomerProfile() {
                           <th>Order Date</th>
                           <th>Received by</th>
                           <th>Order status</th>
-                          <th>EDIT/ DELETE</th>
+                          <th> DELETE</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -187,13 +190,6 @@ function CustomerProfile() {
                               </td>
                               <td>
                                 <div className="edit-delete-icons">
-                                  <Button
-                                    variant="warning"
-                                    size="sm"
-                                    className="me-2"
-                                  >
-                                    <Link>Edit</Link>
-                                  </Button>
                                   <Button
                                     variant="danger"
                                     size="sm"

@@ -112,8 +112,11 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
                   </div>
 
                   <div className="ms-3">
-                    <Form.Check
+                    <input
                       type="checkbox"
+                      name=""
+                      id=""
+                    
                       checked={selectedService.services.includes(
                         service.service_id
                       )}

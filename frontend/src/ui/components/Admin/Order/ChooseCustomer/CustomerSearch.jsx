@@ -38,7 +38,7 @@ function CustomerSearch({
   }, [setFocus, page]);
 
   return (
-    <div ref={wrapperRef} className="container mt-5">
+    <div ref={wrapperRef} className="container  mt-0">
       <div className={focus ? "all-one" : " "}>
         <div className="position-relative mb-4 serch-wrapper ">
           <input

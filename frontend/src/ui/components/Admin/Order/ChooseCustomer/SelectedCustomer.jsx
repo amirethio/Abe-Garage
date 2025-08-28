@@ -10,7 +10,6 @@ function SelectedCustomer({ user, onClose }) {
         <div className="d-flex justify-content-between align-items-start">
           {/* Left: Customer Details */}
           <div>
-    
             <h2 className="mb-2">
               {user.customer_first_name} {user.customer_last_name}
             </h2>
@@ -27,14 +26,14 @@ function SelectedCustomer({ user, onClose }) {
 
             <span className="fw-bold me-2">
               Edit Customer Info{" "}
-              <Button variant="warning" size="sm" className="ms-2">
-                <Link
-                  to={`/admin/${user.customer_hash}/edit-customer`}
-                  className="text-dark text-decoration-none"
-                >
+              <Link
+                to={`/admin/${user.customer_hash}/edit-customer`}
+                className="text-dark text-decoration-none"
+              >
+                <Button variant="warning" size="sm" className="">
                   Edit
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </span>
           </div>
 

@@ -8,6 +8,7 @@ import { Pagination } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { deleteCustomer } from "./../../../../services/customer.service";
 import {LargeLoader} from "../../Loader";
+import { FaUserCircle } from "react-icons/fa";
 
 
 function Customers() {
@@ -97,7 +98,25 @@ function Customers() {
                             {customer.active_customer_status ? "Yes" : "No"}
                           </td>
                           <td>
-                            <div className="edit-delete-icons">
+                            <div className=" d-flex flex-wrap justify-content-center align-items-center">
+                              <div className="d-flex  justify-content-center align-items-center">
+                                <Button
+                                  variant="light"
+                                  size="sm"
+                                  as={Link}
+                                  to={`/admin/Profile/${customer.customer_hash}`}
+                                  title="Profile"
+                                  style={{
+                                    width: "36px",
+                                    height: "36px",
+                                    padding: 0,
+                                    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+                                  }}
+                                  className="d-flex alignItems justify-content-center align-items-center"
+                                >
+                                  <FaUserCircle size={20} color="#4CAF50" />
+                                </Button>
+                              </div>
                               <Button
                                 variant="warning"
                                 size="sm"
@@ -106,6 +125,7 @@ function Customers() {
                                 <Link
                                   to={`/admin/${customer.customer_hash}/edit-customer`}
                                 >
+                                  <i className="bi bi-pencil-square me-1"></i>
                                   Edit
                                 </Link>
                               </Button>
@@ -115,20 +135,8 @@ function Customers() {
                                 onClick={() =>
                                   handleDelete(customer.customer_id)
                                 }
-                              >
-                                Delete
-                              </Button>
-                              <Button
-                                variant="success"
-                                size="sm"
-                                className="me-2"
-                              >
-                                <Link
-                                  to={`/admin/Profile/${customer.customer_hash}`}
-                                  className="text-white text-decoration-none"
-                                >
-                                  Profile
-                                </Link>
+                              className="d-flex" >
+                                <i className="bi bi-trash me-1"></i>{" "} Delete
                               </Button>
                             </div>
                           </td>
@@ -155,7 +163,7 @@ function Customers() {
                 />
                 <Pagination.Item active>{1}</Pagination.Item>
                 <Pagination.Next>
-                  <FaArrowRight className="ms-1" />
+                  {">"}
                 </Pagination.Next>
               </Pagination>
             </div>
@@ -177,3 +185,8 @@ function Customers() {
 }
 
 export default Customers;
+
+
+
+
+                        
