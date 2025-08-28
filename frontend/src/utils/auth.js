@@ -2,9 +2,7 @@ import { jwtDecode } from "jwt-decode";
 
 const extractToken = () => {
     
-  try {
-    console.log("decoding");
-    
+  try {    
     const token = localStorage.getItem("authToken");
     if (token) {
       const decoded = jwtDecode(token);

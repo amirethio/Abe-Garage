@@ -54,10 +54,6 @@ function CustomerProfile() {
 
   return (
     <section className="history-section mt-5 pt-5">
-      {
-        console.log(results)
-        
-      }
       <div className="auto-container">
         <div className="history-block 1">
           <div className="years">info</div>

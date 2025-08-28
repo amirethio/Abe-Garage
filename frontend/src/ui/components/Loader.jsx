@@ -6,8 +6,6 @@ export const MiniLoader = ()=>{
     return (
       <div
         style={{
-          //   position: "fixed",
-          //   inset: 0,
           backgroundColor: "#F6F7FA",
           zIndex: 1050,
           display: "flex",

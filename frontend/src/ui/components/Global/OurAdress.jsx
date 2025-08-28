@@ -1,5 +1,5 @@
 import React from "react";
-import "bootstrap-icons/font/bootstrap-icons.css"; // Make sure Bootstrap icons are imported
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 
 function OurAdress() {
   return (

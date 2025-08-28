@@ -6,7 +6,6 @@ function BottomVideo({ text, video = false, page, img ,height }) {
     <section
       className="video-section position-relative d-flex align-items-center text-white "
       style={{
-        // backgroundImage: `url(${bgImage1})`,
         backgroundImage: `url(${img})`,
         backgroundSize: "cover",
         backgroundPosition: "top center",
@@ -16,23 +15,17 @@ function BottomVideo({ text, video = false, page, img ,height }) {
       <div
         className="position-absolute top-0 start-0 w-100"
         style={{
-        //   backgroundColor: `${!video ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0)"}`,
           height: "420px",
         }}
       ></div>
 
-      {/* Content aligned left */}
       <div className="container position-relative">
         <div className="col-lg-6 col-md-8 text-start">
           <h5 className="fw-light mb-2">Working since 1992</h5>
 
-          {/* Dynamic text from props */}
           <h2 className="fw-bold display-5 ">{text}</h2>
-
-          {/* Show video section only if `video=true` */}
           {video && (
             <div className="d-flex align-items-center mt-4">
-              {/* Play Button */}
               <a
                 href="https://www.youtube.com/"
                 className="d-flex align-items-center justify-content-center rounded-circle bg-danger shadow-lg text-white"

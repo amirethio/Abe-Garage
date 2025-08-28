@@ -28,7 +28,6 @@ function EmployeeList() {
   }
   return (
     <div className="admin-right-side p-4">
-      {console.log(deletestatus)}
       <section className="contact-section pt-0">
         <div className="contact-title mb-4">
           <h2>Employees</h2>
@@ -64,12 +63,12 @@ function EmployeeList() {
                   <td>{employee.company_role_name}</td>
                   <td>
                     <div className="edit-delete-icons">
-                      <Button variant="warning" size="sm" className="me-2">
-                        <Link to={`/admin/${employee.employee_id}/edit-employee`}>
-                          {" "}
-                          <i className="bi bi-pencil-square me-1"></i> Edit{" "}
-                        </Link>
-                      </Button>{" "}
+                      <Link to={`/admin/${employee.employee_id}/edit-employee`}>
+                        <Button variant="warning" size="sm" className="me-2">
+                          <i className="bi bi-pencil-square me-1"></i> Edit
+                        </Button>{" "}
+                      </Link>
+
                       <Button
                         variant="danger"
                         size="sm"

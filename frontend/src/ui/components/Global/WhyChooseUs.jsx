@@ -1,6 +1,6 @@
 import React from "react";
 import whychoose from "./../../../assets/images/misc/why-choose.jpg";
-import "bootstrap-icons/font/bootstrap-icons.css"; // Bootstrap icons import
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 
 function WhyChooseUs() {
   return (

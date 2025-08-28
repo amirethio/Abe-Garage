@@ -39,7 +39,6 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
   };
   return (
     <div className="modal-overlay">
-      {console.log(selectedStatus)}
       <div className="modal-wrapper">
         {/* header */}
         <div className="modal-header">

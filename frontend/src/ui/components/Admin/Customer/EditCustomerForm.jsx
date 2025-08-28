@@ -73,14 +73,11 @@ function EditCustomerForm() {
       const data = await updatecustomer(formData);
 
       if (data.sucess == false) {
-        // console.log("its true and inside here");
 
         setServerError(data.error);
-        // setFormData(InitalialState);
         return;
       }
       setSucess("Updated sucessfully");
-      // setFormData(InitalialState);
     } catch (error) {
       setServerError(error.message || "Submission failed");
     }
@@ -100,15 +97,11 @@ function EditCustomerForm() {
 
   return (
     <section className="contact-section custom-bg pl-5 responsive-form">
-      {
-        console.log(formData)
-        // console.log(customer)
-      }
+   
       <div className="auto-container contact-title ml-6 pl-5">
         <h2>
           Edit :{" "}
           {customer?.customer_first_name + " " + customer?.customer_last_name}
-          {/* <h3>customer Email : {customer?.customer_email}</h3> */}
         </h2>
 
         {ServerError && (

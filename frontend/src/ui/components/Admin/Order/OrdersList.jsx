@@ -104,12 +104,13 @@ deleteOrder(id).then(()=>{
                             setIsDetail(true);
                           }}
                         >
-                          <i className="bi bi-pencil-square me-1">{"      "}.</i>{" "}
+                          <i className="bi bi-pencil-square me-1">{"      "}</i>{" "}
                           Edit{" "}
                         </Button>{" "}
                         <Button
                           variant="danger"
                           size="sm"
+                          className=""
                           onClick={() => handleDelete(order.order_id)}
                         >
                           {" "}

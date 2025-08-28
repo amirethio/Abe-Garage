@@ -5,7 +5,7 @@ export const addOrder = async (order_data) => {
     const response = await axiosInstance.post("/api/order", order_data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return;
   }
 };
 
@@ -16,7 +16,7 @@ export const orderFetch = async (query) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    return [];
   }
 };
 
@@ -25,7 +25,7 @@ export const listOrder = async () => {
     const response = await axiosInstance.get(`api/orders`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return [];
   }
 };
 
@@ -34,7 +34,7 @@ export const SingleOrder = async (id) => {
     const response = await axiosInstance.get(`api/order/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return {};
   }
 };
 
@@ -43,7 +43,7 @@ export const updateOrder = async (updated_status) => {
     const response = await axiosInstance.put("/api/order", updated_status);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return;
   }
 };
 
@@ -52,7 +52,7 @@ export const deleteOrder = async (id) => {
     const response = await axiosInstance.delete(`api/order/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return;
   }
 };
 
@@ -61,6 +61,6 @@ export const getSingleOrder = async (hash) => {
     const response = await axiosInstance.get(`api/track/${hash}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return {};
   }
 };

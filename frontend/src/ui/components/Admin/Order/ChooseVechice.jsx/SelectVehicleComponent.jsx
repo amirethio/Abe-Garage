@@ -23,7 +23,7 @@ function SelectVehicleComponent({
     <>
       <section className="contact-section p-0  pl-3 responsive-form container mt-5 ">
         <div className="auto-container contact-title ml-6 pl-5  shadow p-4 add-vechile mr-3">
-          <h2>Choose a Vehicle</h2>
+          <h2 className="ml-3">Choose a Vehicle</h2>
 
           {loading ? (
             <MiniLoader />

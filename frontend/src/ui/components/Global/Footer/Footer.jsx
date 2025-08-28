@@ -30,8 +30,12 @@ function Footer() {
         </div>
       </div>
 
-      <div className="footer-bottom">
-        © {new Date().getFullYear()} Autorex. All rights reserved.
+      <div className="footer-bottom text-center py-3  text-light">
+        © {new Date().getFullYear()} <strong>Abe Garage</strong>. All rights
+        reserved.
+        <span className="ms-2">
+          Built by <strong>Amir Ali</strong>
+        </span>
       </div>
     </footer>
   );

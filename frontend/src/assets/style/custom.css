@@ -471,7 +471,7 @@ textarea.form-controlu {
 .header-top {
   background-color: #1e2331;
   color: #fff;
-  padding: 5px 0;
+  /* padding: 5px 0; */
   font-size: 14px;
 }
 
@@ -998,4 +998,23 @@ textarea.form-controlu {
   .footer-logo {
     /* margin-bottom: 20px; */
   }
+
+  /* add vechile responsive  */
+  .contact-section .contact-title h2{
+    position:relative;
+    font-size: 30px !important;
+    font-weight:600;
+    margin-bottom: 20px;
+    line-height:1.4em;
+    display: inline-block;
+}
+
+.contact-section .contact-title h2:after{
+    position:absolute;
+    content:'';
+    right: -45px;
+    bottom: 15px;
+    width: 30px;
+    height:2px;
+}
 }

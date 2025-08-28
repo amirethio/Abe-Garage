@@ -5,7 +5,7 @@ export const addServices = async (formData) => {
     const response = await axiosInstance.post("/api/service", formData);
     return response.data;
   } catch (error) {
-    console.log(error);
+   return
   }
 };
 
@@ -14,7 +14,7 @@ export const fetchService = async () => {
     const response = await axiosInstance.get("/api/services");
     return response.data;
   } catch (error) {
-    console.log(error);
+     return [];
   }
 };
 
@@ -23,6 +23,6 @@ export const deleteService = async (id) => {
     const response = await axiosInstance.delete(`/api/service/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return
   }
 };

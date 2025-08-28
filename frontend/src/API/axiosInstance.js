@@ -1,33 +1,6 @@
-// import axios from "axios";
-
-// const axiosInstance = axios.create({
-//   baseURL: import.meta.env.VITE_SERVER_URL,
-//   timeout: 000,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
-
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem("authToken"); 
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
-
-// export default axiosInstance;
-
-
-// ///////////////////////////////
-
 import axios from "axios";
-import logedindata from './../utils/auth'
+import logedindata from "./../utils/auth";
 import { setUserDataExternal } from "../context/AuthContext";
-
 
 let accessToken = null;
 
@@ -65,21 +38,15 @@ axiosInstance.interceptors.response.use(
         setAccessToken(res.data.accessToken);
         localStorage.setItem("authToken", res.data.accessToken);
 
-if(setUserDataExternal){
-const decode = logedindata();
-setUserDataExternal(decode)
-}
-
-
-
-
+        if (setUserDataExternal) {
+          const decode = logedindata();
+          setUserDataExternal(decode);
+        }
 
         originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        console.log(refreshError);
-        
-        // ⛔ refresh failed → logout
+        // refresh failed → logout
         localStorage.removeItem("authToken");
         window.location.href = "/login";
         return Promise.reject(refreshError);
@@ -89,6 +56,5 @@ setUserDataExternal(decode)
     return Promise.reject(error);
   }
 );
-
 
 export default axiosInstance;

@@ -50,9 +50,9 @@ function Addvehicle({ id, newCustomer, setnewCustomer }) {
     <>
       {newCustomer && (
         <section className="contact-section p-0  pl-3 responsive-form container mt-5 ">
-          <div className="auto-container contact-title ml-6 pl-5  shadow p-4 add-vechile vehicle-cancel">
+          <div className="auto-container contact-title ml-lg-6 pl-lg-5  shadow p-lg-4 py-4  add-vechile vehicle-cancel">
             <div className="">
-              <h2>Add a new vehicle</h2>
+              <h2 className=" pl-4">Add a new vehicle</h2>
               {ServerError && (
                 <div className="d-flex mt-3">
                   <div

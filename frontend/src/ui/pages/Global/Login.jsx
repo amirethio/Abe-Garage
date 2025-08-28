@@ -57,8 +57,6 @@ function Login() {
         navigate("/");
       } 
     } catch (err) {
-      console.log(err);
-
       setErrors("something went wrong");
     }
   };

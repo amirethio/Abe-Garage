@@ -1,93 +1,78 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { fetchService } from "./../../../../../services/service.service";
 import { LargeLoader } from "../../../Loader";
 
 function ChooseService({ selectedService, setSelectedService, setfinish }) {
   const [services, setservices] = useState([]);
-  const [customService, setCustomService] = useState({
-    price: "",
-    service_description: "",
-    estimated_time: "",
-  });
   const [errors, setErrors] = useState({
     price: "",
     service_selection: "",
     service_description: "",
+    estimated_time: "",
   });
-    const [loading, setLoading] = useState(true); 
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchService().then((res) => {
       setservices(res);
-      setLoading(false)
+      setLoading(false);
     });
   }, []);
 
-  const handleChange = (serviceName) => {
-    if (selectedService.services.includes(serviceName)) {
-      setSelectedService({
-        ...selectedService,
-        services: selectedService.services.filter((s) => s !== serviceName),
-      });
-    } else {
-      setSelectedService({
-        ...selectedService,
-        services: [...selectedService.services, serviceName],
-      });
-    }
-  };
-
-  const handleAddCustomService = (e) => {
+  // ✅ updates any field inside selectedService
+  const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    setCustomService((prev) => ({
+    setSelectedService((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  // ✅ toggles services
+  const handleChange = (serviceId) => {
+    setSelectedService((prev) => {
+      const services = prev.services.includes(serviceId)
+        ? prev.services.filter((s) => s !== serviceId)
+        : [...prev.services, serviceId];
+      return { ...prev, services };
+    });
+  };
+
+  // ✅ form validation
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = {
       price: "",
       service_selection: "",
       service_description: "",
+      estimated_time: "",
     };
+
     let hasError = false;
 
-    if (customService.price.trim() === "") {
+    if (!selectedService.price?.trim()) {
       newErrors.price = "Price is required.";
       hasError = true;
     }
     if (
       selectedService.services.length === 0 &&
-      customService.service_description.trim() === ""
+      !selectedService.additional_request?.trim()
     ) {
       newErrors.service_selection =
-        "Select at least one service OR fill description.";
+        "Select at least one service OR provide a description.";
       hasError = true;
     }
-    if (customService.estimated_time.trim() === "") {
+    if (!selectedService.estimated_time?.trim()) {
       newErrors.estimated_time = "Estimated completion date is required.";
       hasError = true;
     }
-
 
     setErrors(newErrors);
 
     if (hasError) return;
 
-    const updatedService = {
-      ...selectedService,
-      price: customService.price,
-      additional_request: customService.service_description,
-      estimated_time: customService.estimated_time,
-    };
-    setSelectedService(updatedService);
-    if (updatedService.price !== "" && updatedService.services.length > 0) {
-      setfinish(true);
-    }
+    // if everything is valid
+    setfinish(true);
   };
 
   return (
@@ -114,9 +99,6 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
                   <div className="ms-3">
                     <input
                       type="checkbox"
-                      name=""
-                      id=""
-                    
                       checked={selectedService.services.includes(
                         service.service_id
                       )}
@@ -144,6 +126,7 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
             <h2 className="mb-3">Additional Requests</h2>
 
             <form onSubmit={handleSubmit}>
+              {/* Description */}
               <div className="mb-3">
                 <textarea
                   className={`form-controlu ${
@@ -151,42 +134,46 @@ function ChooseService({ selectedService, setSelectedService, setfinish }) {
                   }`}
                   rows="3"
                   placeholder="Service description"
-                  value={customService.service_description}
-                  name="service_description"
-                  onChange={handleAddCustomService}
-                ></textarea>
+                  value={selectedService.additional_request || ""}
+                  name="additional_request"
+                  onChange={handleFieldChange}
+                />
                 {errors.service_description && (
                   <div className="text-danger small">
                     {errors.service_description}
                   </div>
                 )}
               </div>
+
+              {/* Price */}
               <div className="mb-3">
                 <input
                   type="text"
                   className={`form-controlu mb-2 ${
                     errors.price ? "is-invalid" : ""
                   }`}
-                  placeholder="Price"
-                  value={customService.price}
+                  placeholder="Price in Dollar eg, 10 (numbers only)"
+                  value={selectedService.price || ""}
                   name="price"
-                  onChange={handleAddCustomService}
+                  onChange={handleFieldChange}
                 />
                 {errors.price && (
                   <div className="text-danger small">{errors.price}</div>
                 )}
               </div>
+
+              {/* Estimated Time */}
               <div className="mb-3 d-flex align-items-center gap-2">
                 <p className="pr-2">Estimated time</p>
                 <input
                   type="date"
-                  className={`form-controlu mb-2  ${
+                  className={`form-controlu mb-2 ${
                     errors.estimated_time ? "is-invalid" : ""
                   }`}
                   style={{ width: "auto" }}
-                  value={customService.estimated_time}
+                  value={selectedService.estimated_time || ""}
                   name="estimated_time"
-                  onChange={handleAddCustomService}
+                  onChange={handleFieldChange}
                 />
                 {errors.estimated_time && (
                   <div className="text-danger small">
