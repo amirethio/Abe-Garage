@@ -43,7 +43,6 @@ async function getAllEmployees(req, res, next) {
       error: "Failed to get all employees!",
     });
   } else {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     res.status(200).json({
       status: "success",
       data: employees,

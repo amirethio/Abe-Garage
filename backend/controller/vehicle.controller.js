@@ -15,7 +15,6 @@ async function addVehicle(req, res, next) {
 async function getVehicles(req, res, next) {
   try {
     const response = await VehicleService.getVehicles(req.params.id);
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // delay
 
     res.status(200).json(response);
   } catch (error) {

@@ -3,7 +3,6 @@ const JWT_REFRESH_SECRET_KEY = process.env.JWT_REFRESH_SECRET_KEY;
 const ACCESS_SECRET_KEY = process.env.JWT_ACCESS_SECRET_KEY;
 
 async function refreshToken(req, res, next) {
-    console.log("its here now")
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken)
     return res.status(401).json({ message: "No refresh token" });

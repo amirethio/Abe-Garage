@@ -61,7 +61,6 @@ async function addOrder(order_data) {
       order_id: OrderId,
     };
   } catch (error) {
-    console.error("Error inserting order:", error);
 
     return {
       success: false,
@@ -201,10 +200,8 @@ async function deleteOrder(order_id) {
     await connection.query(`DELETE FROM orders WHERE order_id = ?`, [order_id]);
 
     await connection.commit();
-    console.log("Order and related data deleted successfully");
     return { success: true };
   } catch (error) {
-    console.error("Error deleting order:", error);
     await connection.rollback();
     return { success: false, error };
   } finally {
@@ -222,6 +219,10 @@ async function getSingleOrder(hash) {
     customer_identifier.customer_phone_number,
     customer_vehicle_info.vehicle_make,
     customer_vehicle_info.vehicle_model,
+    customer_vehicle_info.vehicle_type,
+    customer_vehicle_info.vehicle_color,
+    customer_vehicle_info.vehicle_tag,
+    customer_vehicle_info.vehicle_mileage,
     customer_vehicle_info.vehicle_year,
     customer_vehicle_info.vehicle_serial,
     employee_info.employee_first_name,

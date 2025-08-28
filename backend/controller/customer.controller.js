@@ -62,7 +62,6 @@ async function searchCustomers(req,res,next) {
 
   try {
     const response = await customerService.searchCustomers(req.query.query);
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // delay
 
     res.send(response);
   } catch (error) {

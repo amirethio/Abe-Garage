@@ -99,7 +99,6 @@ async function deleteVehicle(vehicle_id) {
       try {
         const sql = `SELECT * FROM customer_vehicle_info WHERE vehicle_id = ?`;
         const response = await db.query(sql, [vehicle_id]);
-        console.log(response);
       } catch (error) {}
     }
     return { success: false, error };

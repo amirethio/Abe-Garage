@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT;
 var corsOptions = {
   origin: process.env.FRONTEND,
+  origin: "http://10.205.30.174:5173",
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -30,7 +31,7 @@ app.get('/test' , (req,res)=>{res.send("okay")})
 
 // APP : LISTENING 
 app.listen(PORT, () => {
-  console.log(`app is running on http://localhost:${PORT}`);
+  console.log(`app is running`);
 });
 
 module.exports = app;

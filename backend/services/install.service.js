@@ -25,9 +25,7 @@ async function install() {
   for (let i = 0; i < queries.length; i++) {
     try {
       await conn.query(queries[i]);
-      console.log("table created");
     } catch (error) {
-      console.log(error)
       finalMessage.message = "Not all table created";
     }
   }
