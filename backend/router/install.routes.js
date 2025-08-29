@@ -5,4 +5,5 @@ const installController = require('./../controller/install.controller')
 
 router.get("/install", installController);
 
+
 module.exports =router

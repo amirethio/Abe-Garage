@@ -8,7 +8,7 @@ async function loginController(req, res, next) {
   try {
     const EmployeeExists = await loginService.login(req.body);
     if (EmployeeExists.status == "fail") {
-      return res.status(401).json({
+      return res.status(405).json({
         status: EmployeeExists.status,
         message: EmployeeExists.message,
       });

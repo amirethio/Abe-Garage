@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT;
 var corsOptions = {
   origin: process.env.FRONTEND,
-  origin: "http://10.205.30.174:5173",
+  // origin: "http://10.205.30.129:5173",
   optionsSuccessStatus: 200,
   credentials: true,
 };

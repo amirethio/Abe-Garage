@@ -16,6 +16,7 @@ function Login() {
   const context = useAuth();
 
   const handleChange = (event) => {
+    setErrors("")
     const { value, name } = event.target;
     setFormData((prev) => ({
       ...prev,
