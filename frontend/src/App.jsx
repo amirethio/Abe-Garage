@@ -51,7 +51,7 @@ function App() {
           element={
             <PrivateAuth role={[3]}>
               <AddEmployee />
-            </PrivateAuth>
+             </PrivateAuth>
           }
         />
         <Route

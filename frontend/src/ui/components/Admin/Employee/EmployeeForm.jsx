@@ -1,4 +1,3 @@
-// Same functionality — only CSS will make it responsive
 import React, { useState } from "react";
 import { submitEmployee } from "../../../../services/employee.service";
 
@@ -61,12 +60,16 @@ function EmployeeForm() {
     }
     try {
       const data = await submitEmployee(formData);
+      console.log(data);
+      
       if (data.success == "false") {
         setServerError(data.error);
         return;
       }
       setsucess("Registered Sucessfully");
     } catch (error) {
+      console.log(error)
+      
       setServerError(error.message || "Submission failed");
     }
   };
