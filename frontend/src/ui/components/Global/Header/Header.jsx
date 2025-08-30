@@ -73,25 +73,28 @@ useEffect(() => {
               <div className="my d-none d-lg-flex align-items-center py-2">
                 <div className="nav-outer">
                   <nav className="main-menu  navbar-light">
-                    <ul className="navigation d-flex list-unstyled mb-0">
-                      <li className="dropdown">
+                    <ul className="navigation d-flex list-unstyled mb-0 ml-0">
+                      <li className="dropdown mr-3 mr-xl-4">
                         <Link to="/">Home</Link>
                       </li>
-                      <li className="dropdown">
+                      <li className="dropdown mr-3 mr-xl-4">
                         <Link to="/about">About Us</Link>
                       </li>
-                      <li className="dropdown">
+                      <li className="dropdown mr-2 mr-xl-4">
                         <Link to="/services">Services</Link>
                       </li>
-                      <li>
+                      <li className="mr-3 mr-xl-4">
                         <Link to="/contact">Contact Us</Link>
+                      </li>
+                      <li className="mr-2 mr-xl-4">
+                        <Link to="/track">Track Order</Link>
                       </li>
                     </ul>
                   </nav>
                 </div>
                 {(context?.userData?.employee_role === 3 ||
                   context?.userData?.employee_role == 2) && (
-                  <div className="search-btn ml-3">
+                  <div className="search-btn ml-2 pl-2 pl-xl-4">
                     <Link to="/admin" className="admin-panel">
                       Dashboard
                     </Link>

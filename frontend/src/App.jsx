@@ -37,7 +37,6 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/unauthorized" element={<NotAuthorized />} />
         <Route path="/track" element={<TrackOrder />} />
-        <Route path="/test" element={<AdminSidebar />} />
         <Route
           path="/admin"
           element={

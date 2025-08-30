@@ -60,6 +60,11 @@ export default function MobileMenu({ isOpen, closeMenu, logout }) {
               Contact Us
             </Link>
           </li>
+          <li>
+            <Link to="/track" onClick={closeMenu}>
+              Track Order
+            </Link>
+          </li>
           {(context?.userData?.employee_role === 2 ||
             context?.userData?.employee_role === 3) && (
             <li>

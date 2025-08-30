@@ -17,6 +17,7 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { updateOrder } from "./../../../../services/order.service";
 
 const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
+    const [copied, setCopied] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState({
     order_id: orderData.order_id,
     order_status: orderData.order_status,
@@ -34,9 +35,16 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
 
   const orderSubmit = async () => {
     const result = await updateOrder(selectedStatus);
-    setIsDetail(false)
-    setFetch((pre)=>!pre)
+    setIsDetail(false);
+    setFetch((pre) => !pre);
   };
+  async function CopyHash( hash ) {
+
+    await navigator.clipboard.writeText(hash);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-wrapper">
@@ -69,6 +77,7 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
         {/* body */}
         <div className="modal-body">
           {/* Customer Info & Vehicle Info */}
+
           <div className="rowu">
             <div className="col-card">
               <div className="card-section">
@@ -191,8 +200,11 @@ const OrderDetailModal = ({ setIsDetail, orderData, setFetch }) => {
             <div className="hash-text">
               <strong>Hash:</strong> {orderData.order_hash}
             </div>
-            <button className="btn btn-outline-secondary btn-sm circle-btn">
-              <FaCopy />
+            <button
+              className="btn btn-outline-secondary btn-sm circle-btn"
+              onClick={() => CopyHash(orderData.order_hash)}
+            >
+              {copied ? "Copied!" : <FaCopy />}
             </button>
           </div>
         </div>
